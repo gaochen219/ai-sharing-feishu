@@ -174,7 +174,10 @@
   .photo-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
   .ph{aspect-ratio:4/3;border:1px dashed rgba(0,240,255,.3);background:rgba(0,240,255,.03);
     border-radius:4px;display:grid;place-items:center;position:relative;overflow:hidden}
-  .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph:has(img){border-style:solid;border-color:rgba(255,255,255,.14)}
+  .ph:has(img)::after{content:"";position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 38px rgba(0,240,255,.16)}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04)}
   .ph .phl{font:500 10px/1.6 "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:.14em;text-align:center;padding:8px}
   .ph .tag{position:absolute;left:0;bottom:0;right:0;padding:7px 9px;font-size:11px;font-weight:600;
     color:var(--ink-0);background:linear-gradient(0deg,rgba(3,5,13,.92),transparent)}
@@ -340,12 +343,15 @@
       </div>
     </div>
     <div class="body">
-      <!-- PHOTOS: 替换 .ph 内容为 <img src="assets/xxx.jpg"> + <div class="tag">场合</div> -->
       <div class="photo-wall reveal reveal-4">
-        <div class="ph"><div class="phl">PHOTO&nbsp;01<br/>待补</div></div>
-        <div class="ph"><div class="phl">PHOTO&nbsp;02<br/>待补</div></div>
-        <div class="ph"><div class="phl">PHOTO&nbsp;03<br/>待补</div></div>
-        <div class="ph"><div class="phl">PHOTO&nbsp;04<br/>待补</div></div>
+        <div class="ph"><img src="assets/talk-boao.jpg" alt="博鳌亚洲论坛 2026 年年会">
+          <div class="tag">博鳌亚洲论坛 · 2026 年年会</div></div>
+        <div class="ph"><img src="assets/talk-lujiazui.jpg" alt="陆家嘴论坛 零售 + AI">
+          <div class="tag">陆家嘴论坛 · 零售 + AI</div></div>
+        <div class="ph"><img src="assets/talk-amcham.jpg" alt="上海美国商会 WEFORSHE 论坛 AI at Work">
+          <div class="tag">上海美商会 · 「AI at Work」</div></div>
+        <div class="ph"><img src="assets/talk-robospace.jpg" alt="Robo Space AI 如何重构智慧场景">
+          <div class="tag">Robo Space · AI 如何重构智慧场景</div></div>
       </div>
       <div class="chips reveal reveal-5" style="margin-top:16px">
         <div class="chip">腾讯 AI 会议 · <b>企业 AI 落地</b></div>
