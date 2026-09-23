@@ -78,7 +78,7 @@
   .q{font-size:clamp(28px,4.0vw,56px);font-weight:800;line-height:1.24;letter-spacing:-.01em;margin-top:14px}
   .q em{font-style:normal;color:var(--cyan);text-shadow:0 0 28px rgba(0,240,255,.4)}
   .q i{font-style:normal;color:var(--magenta);text-shadow:0 0 28px rgba(255,43,214,.4)}
-  .sub{margin-top:14px;font-size:clamp(13px,1.25vw,17px);color:var(--ink-2);line-height:1.75;font-weight:300;max-width:60ch}
+  .sub{margin-top:14px;font-size:clamp(14px,1.45vw,20px);color:var(--ink-2);line-height:1.75;font-weight:300;max-width:60ch}
   .sub b{color:var(--ink-0);font-weight:600}
   .hl{color:var(--cyan);font-weight:600}
   .mg{color:var(--magenta);font-weight:600}
@@ -141,12 +141,12 @@
   .stat.m::before{background:linear-gradient(90deg,var(--magenta),transparent)}
   .stat.l::before{background:linear-gradient(90deg,var(--lime),transparent)}
   .stat.g::before{background:linear-gradient(90deg,var(--gold),transparent)}
-  .stat .n{font-size:clamp(26px,3.3vw,46px);font-weight:900;line-height:1;color:var(--cyan);
+  .stat .n{font-size:clamp(32px,4.1vw,58px);font-weight:900;line-height:1;color:var(--cyan);
     font-family:"JetBrains Mono",monospace;letter-spacing:-.02em}
   .stat.m .n{color:var(--magenta)} .stat.l .n{color:var(--lime)} .stat.g .n{color:var(--gold)}
   .stat .n small{font-size:.44em;font-weight:700;margin-left:3px;letter-spacing:0}
-  .stat .lab{margin-top:10px;font-size:12px;color:var(--ink-1);font-weight:600}
-  .stat .sub2{margin-top:4px;font:400 10px/1.5 "JetBrains Mono",monospace;color:var(--ink-3)}
+  .stat .lab{margin-top:11px;font-size:14px;color:var(--ink-1);font-weight:600}
+  .stat .sub2{margin-top:5px;font:400 11.5px/1.5 "JetBrains Mono",monospace;color:var(--ink-3)}
 
   /* ===== generic cards ===== */
   .cards{display:grid;gap:12px}
@@ -165,7 +165,7 @@
 
   /* ===== quote banner ===== */
   .quote{margin-top:16px;border-left:2px solid var(--gold);padding:13px 18px;background:rgba(255,200,87,.06);border-radius:0 4px 4px 0}
-  .quote .qt{font-size:14px;line-height:1.7;color:var(--ink-0);font-weight:600}
+  .quote .qt{font-size:16px;line-height:1.7;color:var(--ink-0);font-weight:600}
   .quote .qs{margin-top:8px;font:400 10px/1 "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:.1em}
   .quote.cy{border-left-color:var(--cyan);background:rgba(0,240,255,.06)}
   .quote.mg{border-left-color:var(--magenta);background:rgba(255,43,214,.06)}
@@ -365,27 +365,27 @@
   .quotes .q-grid{width:100%;max-width:1320px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .q-card{position:relative;padding:22px 16px 14px;border:1px solid rgba(0,240,255,.18);
     background:linear-gradient(180deg,rgba(0,240,255,.045),transparent);
-    display:flex;flex-direction:column;gap:8px;min-height:172px;transition:transform .3s,border-color .3s}
+    display:flex;flex-direction:column;gap:8px;min-height:188px;transition:transform .3s,border-color .3s}
   .q-card:hover{transform:translateY(-4px);border-color:rgba(0,240,255,.45)}
   .q-card.mg{border-color:rgba(255,43,214,.2);background:linear-gradient(180deg,rgba(255,43,214,.05),transparent)}
   .q-card.mg:hover{border-color:rgba(255,43,214,.5)}
   .q-card .mark{position:absolute;top:2px;left:14px;font-family:"Cormorant Garamond",serif;
     font-size:58px;line-height:1;color:rgba(0,240,255,.2);pointer-events:none}
   .q-card.mg .mark{color:rgba(255,43,214,.22)}
-  .q-card .q-text{font-size:14.5px;line-height:1.55;color:var(--ink-0);font-weight:500;margin-top:14px;z-index:1}
-  .q-card .q-en{font-size:10.5px;line-height:1.5;color:var(--ink-2);font-style:italic}
-  .q-card .q-sub{font-size:11.5px;line-height:1.5;color:var(--ink-2)}
+  .q-card .q-text{font-size:16.5px;line-height:1.55;color:var(--ink-0);font-weight:500;margin-top:14px;z-index:1}
+  .q-card .q-en{font-size:11.5px;line-height:1.5;color:var(--ink-2);font-style:italic}
+  .q-card .q-sub{font-size:12.5px;line-height:1.5;color:var(--ink-2)}
   .q-card .q-by{margin-top:auto;padding-top:10px;border-top:1px dashed rgba(255,255,255,.09)}
-  .q-card .q-by .nm{font-weight:600;color:var(--cyan);font-size:12.5px}
+  .q-card .q-by .nm{font-weight:600;color:var(--cyan);font-size:13.5px}
   .q-card.mg .q-by .nm{color:var(--magenta)}
-  .q-card .q-by .role{font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--ink-2);
+  .q-card .q-by .role{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--ink-2);
     letter-spacing:1px;margin-top:3px}
   .q-card.ask{border-style:dashed}
   .q-card.ask .mark{font-family:"Inter",sans-serif;font-weight:800}
   .q-card.data{border-color:rgba(255,200,87,.25);background:linear-gradient(180deg,rgba(255,200,87,.05),transparent)}
   .q-card.data .mark{color:rgba(255,200,87,.22)}
   .q-card.data .q-by .nm{color:var(--gold)}
-  .q-card .big-n{font-family:"JetBrains Mono",monospace;font-weight:900;font-size:40px;
+  .q-card .big-n{font-family:"JetBrains Mono",monospace;font-weight:900;font-size:48px;
     line-height:1;color:var(--gold);margin-top:14px}
 
   /* ===== value grid (P5) ===== */
@@ -398,12 +398,12 @@
   .vc.m::before{background:linear-gradient(90deg,var(--magenta),transparent)}
   .vc.l::before{background:linear-gradient(90deg,var(--lime),transparent)}
   .vc.g::before{background:linear-gradient(90deg,var(--gold),transparent)}
-  .vc .vk{font:600 9.5px/1.4 "JetBrains Mono",monospace;letter-spacing:.16em;color:var(--ink-3);
+  .vc .vk{font:600 11px/1.4 "JetBrains Mono",monospace;letter-spacing:.16em;color:var(--ink-3);
     text-transform:uppercase;min-height:26px}
-  .vc .vfrom{margin-top:10px;font-size:12.5px;color:var(--ink-3);text-decoration:line-through;
+  .vc .vfrom{margin-top:11px;font-size:14px;color:var(--ink-3);text-decoration:line-through;
     text-decoration-color:rgba(255,84,112,.5)}
   .vc .varrow{margin:5px 0;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-3)}
-  .vc .vto{font-size:clamp(15px,1.5vw,19px);font-weight:800;color:var(--cyan);line-height:1.3}
+  .vc .vto{font-size:clamp(17px,1.8vw,24px);font-weight:800;color:var(--cyan);line-height:1.3}
   .vc.m .vto{color:var(--magenta)} .vc.l .vto{color:var(--lime)} .vc.g .vto{color:var(--gold)}
 
   /* ===== pit cards (P7) ===== */
@@ -429,8 +429,59 @@
   .linkbar .ico{font-size:13px}
   .cat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
   .cat{border:1px solid var(--card-line);background:var(--card);border-radius:3px;padding:12px 10px;text-align:center}
-  .cat .cn{font-family:"JetBrains Mono",monospace;font-weight:800;font-size:20px;color:var(--cyan)}
-  .cat .cl{margin-top:6px;font-size:11px;color:var(--ink-2);line-height:1.4}
+  .cat .cn{font-family:"JetBrains Mono",monospace;font-weight:800;font-size:27px;color:var(--cyan)}
+  .cat .cl{margin-top:7px;font-size:12.5px;color:var(--ink-2);line-height:1.4}
+
+  /* ===== cover · ocean ===== */
+  .slide.ocean{padding:0;justify-content:center;align-items:center}
+  #oceanGl{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+  .ocean-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(ellipse at 28% 46%,rgba(3,5,13,.72) 0%,rgba(3,5,13,.45) 38%,rgba(3,5,13,.15) 68%,transparent 100%)}
+  .ocean-inner{position:relative;z-index:2;width:100%;height:100%;
+    display:flex;flex-direction:column;justify-content:center;padding:9vh 7vw 11vh}
+  .ocean .mega{margin-top:18px;line-height:.94}
+  .share-word{display:block;font-size:clamp(56px,10.5vw,158px);font-weight:900;letter-spacing:-.04em;
+    background:linear-gradient(180deg,#ffffff 0%,var(--cyan) 92%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 46px rgba(0,240,255,.45))}
+  .share-sub{display:block;font-family:"Orbitron",sans-serif;font-weight:500;
+    font-size:clamp(17px,2.9vw,42px);letter-spacing:.34em;color:var(--ink-1);
+    margin-top:6px;text-shadow:0 0 26px rgba(0,240,255,.3)}
+  .cover-q{margin-top:26px;font-size:clamp(15px,1.9vw,27px);font-weight:700;color:var(--ink-0);
+    text-shadow:0 2px 24px rgba(3,5,13,.8)}
+  .cover-q em{font-style:normal;color:var(--cyan);text-shadow:0 0 26px rgba(0,240,255,.5)}
+  .ocean .meta-row{margin-top:30px}
+  .ocean .meta-row .v,.ocean .topic-en,.ocean .h-line{text-shadow:0 2px 18px rgba(3,5,13,.85)}
+
+  /* ===== P6 inline stats ===== */
+  .n6{font-family:"JetBrains Mono",monospace;font-weight:900;line-height:1;
+    font-size:clamp(28px,3.4vw,50px);color:var(--cyan);letter-spacing:-.02em}
+  .n6.mg6{color:var(--magenta)} .n6.lm6{color:var(--lime)}
+  .l6{margin-top:7px;font-size:12.5px;color:var(--ink-2);font-weight:600}
+
+  /* ===== P11 · questions + constellation ===== */
+  .slide.stars{padding:0;justify-content:center}
+  #starsCv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+  .stars-inner{position:relative;z-index:2;width:100%;height:100%;
+    display:flex;flex-direction:column;justify-content:center;padding:8vh 6vw 10vh}
+  .q5{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;margin-top:22px}
+  .q5 .qq{border:1px solid rgba(0,240,255,.2);background:rgba(3,5,13,.45);backdrop-filter:blur(3px);
+    border-radius:5px;padding:24px 26px;display:flex;gap:20px;align-items:flex-start;
+    transition:border-color .3s,transform .3s,background .3s}
+  .q5 .qq:hover{border-color:rgba(0,240,255,.55);transform:translateY(-4px);background:rgba(3,5,13,.62)}
+  .q5 .qq.wide{grid-column:1 / -1}
+  .q5 .qn{font-family:"Orbitron",sans-serif;font-weight:900;font-size:clamp(20px,2.2vw,32px);
+    color:var(--cyan);opacity:.45;flex:0 0 auto;line-height:1.1}
+  .q5 .qq:nth-child(2) .qn{color:var(--magenta)}
+  .q5 .qq:nth-child(3) .qn{color:var(--lime)}
+  .q5 .qq:nth-child(4) .qn{color:var(--gold)}
+  .q5 .qq:nth-child(5) .qn{color:var(--magenta)}
+  .q5 .qt5{font-size:clamp(17px,1.95vw,28px);font-weight:800;line-height:1.45;color:var(--ink-0)}
+  .q5 .qt5 em{font-style:normal;color:var(--cyan);text-shadow:0 0 22px rgba(0,240,255,.4)}
+  .q5 .qq:nth-child(2) .qt5 em{color:var(--magenta);text-shadow:0 0 22px rgba(255,43,214,.4)}
+  .q5 .qq:nth-child(3) .qt5 em{color:var(--lime);text-shadow:0 0 22px rgba(194,255,61,.35)}
+  .q5 .qq:nth-child(4) .qt5 em{color:var(--gold);text-shadow:0 0 22px rgba(255,200,87,.35)}
+  .q5 .qq:nth-child(5) .qt5 em{color:var(--magenta);text-shadow:0 0 22px rgba(255,43,214,.4)}
 
   @media (max-width:1100px){
     .pi-bar{grid-template-columns:repeat(5,1fr)}
@@ -446,28 +497,34 @@
 <canvas id="particles"></canvas>
 
 <div class="hud">
-  <div><span class="dot"></span>GLP · DT &nbsp;//&nbsp; GUEST SHARING</div>
+  <div><span class="dot"></span>LIVE SHARING WORKSHOP</div>
   <div id="clock">--:--:--</div>
 </div>
 
 <div class="deck" id="deck">
 
-  <!-- ============ 1 · Cover ============ -->
-  <section class="slide cover brackets">
+  <!-- ============ 1 · Cover · Water Ripple ============ -->
+  <section class="slide cover ocean brackets">
+    <canvas id="oceanGl"></canvas>
+    <div class="ocean-veil"></div>
     <span class="br-bl"></span><span class="br-br"></span>
-    <div class="logo-mark reveal reveal-1">CG</div>
-    <div class="topic-en reveal reveal-2">A &nbsp;C L I E N T ' S &nbsp; V I E W</div>
-    <h1 class="mega reveal reveal-3">
-      AI 落地的核心<br/>是让 AI <em>更聪明</em>吗？
-    </h1>
-    <div class="h-line reveal reveal-4">
-      <span class="bar"></span><span>SHARING&nbsp;·&nbsp;NOT&nbsp;SELLING</span><span class="bar"></span>
-    </div>
-    <div class="meta-row reveal reveal-5">
-      <div><div class="k">SPEAKER</div><div class="v">Chen Gao · 高 晨</div></div>
-      <div><div class="k">ROLE</div><div class="v">VP · Big Data &amp; AI · GLP</div></div>
-      <div><div class="k">VENUE</div><div class="v">飞书 AI Solution · Workshop</div></div>
-      <div><div class="k">DATE</div><div class="v">2026.09.23</div></div>
+    <div class="ocean-inner">
+      <div class="logo-mark reveal reveal-1">CG</div>
+      <div class="topic-en reveal reveal-2">A &nbsp;C L I E N T ' S &nbsp; V I E W</div>
+      <h1 class="mega reveal reveal-3">
+        <span class="share-word">SHARING</span><br/>
+        <span class="share-sub">WORKSHOP</span>
+      </h1>
+      <div class="cover-q reveal reveal-4">AI 落地的核心，是让 AI <em>更聪明</em>吗？</div>
+      <div class="h-line reveal reveal-5">
+        <span class="bar"></span><span>SHARING&nbsp;·&nbsp;NOT&nbsp;SELLING</span><span class="bar"></span>
+      </div>
+      <div class="meta-row reveal reveal-6">
+        <div><div class="k">SPEAKER</div><div class="v">Chen Gao</div></div>
+        <div><div class="k">ROLE</div><div class="v">VP · Big Data &amp; AI · GLP</div></div>
+        <div><div class="k">VENUE</div><div class="v">飞书 AI Solution</div></div>
+        <div><div class="k">DATE</div><div class="v">2026.09.23</div></div>
+      </div>
     </div>
   </section>
 
@@ -544,22 +601,18 @@
   <section class="slide">
     <div class="head">
       <div class="eyebrow reveal reveal-1">02 · 我是一个 ACTIVE SHARER</div>
-      <h2 class="q reveal reveal-2">为什么我愿意<br/>把<i>坑</i>都讲出来？</h2>
-      <div class="sub reveal reveal-3">
-        因为 AI 落地这件事，<b>成功经验很难复制，失败经验却高度通用</b>。<br/>
-        这几年我在内部、行业会议、厂商大会上讲过很多次 — 今天这场，我想讲得更实一点。
+      <h2 class="q reveal reveal-2">Sharing — why <em>1&nbsp;+&nbsp;1&nbsp;&gt;&nbsp;2</em>?</h2>
+      <div class="sub big reveal reveal-3">
+        把<b>单线程的努力</b>，变成<b>多线程的回响</b>。<br/>
+        分享带来三个增幅 —— <span class="hl">认知增幅</span> · <span class="mg">资源增幅</span> · <span class="lm">信用增幅</span>。
       </div>
     </div>
     <div class="body">
       <div class="photo-wall reveal reveal-4">
-        <div class="ph"><img src="assets/talk-boao.jpg" alt="博鳌亚洲论坛 2026 年年会">
-          <div class="tag">博鳌亚洲论坛 · 2026 年年会</div></div>
-        <div class="ph"><img src="assets/talk-lujiazui.jpg" alt="陆家嘴论坛 零售 + AI">
-          <div class="tag">陆家嘴论坛 · 零售 + AI</div></div>
-        <div class="ph"><img src="assets/talk-amcham.jpg" alt="上海美国商会 WEFORSHE 论坛 AI at Work">
-          <div class="tag">上海美商会 · 「AI at Work」</div></div>
-        <div class="ph"><img src="assets/talk-robospace.jpg" alt="Robo Space AI 如何重构智慧场景">
-          <div class="tag">Robo Space · AI 如何重构智慧场景</div></div>
+        <div class="ph"><img src="assets/talk-boao.jpg" alt="博鳌亚洲论坛 2026 年年会"></div>
+        <div class="ph"><img src="assets/talk-lujiazui.jpg" alt="陆家嘴论坛 零售 + AI"></div>
+        <div class="ph"><img src="assets/talk-amcham.jpg" alt="上海美国商会 WEFORSHE 论坛 AI at Work"></div>
+        <div class="ph"><img src="assets/talk-robospace.jpg" alt="Robo Space AI 如何重构智慧场景"></div>
       </div>
       <div class="chips reveal reveal-5" style="margin-top:16px">
         <div class="chip">腾讯 AI 会议 · <b>企业 AI 落地</b></div>
@@ -637,52 +690,57 @@
 
   <!-- ============ 6 · 有趣的 idea ============ -->
   <section class="slide">
-    <div class="head">
-      <div class="eyebrow reveal reveal-1">03 · 我们有哪些有趣的 IDEA</div>
-      <h2 class="q reveal reveal-2">一个 AI 团队的<br/>「<i>下班时间</i>」在干嘛？</h2>
+    <div class="head" style="display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end">
+      <div>
+        <div class="eyebrow reveal reveal-1">03 · 我们有哪些有趣的 IDEA</div>
+        <h2 class="q reveal reveal-2">一个 AI 团队的<br/>「<i>下班时间</i>」在干嘛？</h2>
+      </div>
+      <div class="reveal reveal-3" style="display:flex;gap:26px;padding-bottom:6px">
+        <div style="text-align:right">
+          <div class="n6 count" data-to="83">0</div><div class="l6">个调研课题</div></div>
+        <div style="text-align:right">
+          <div class="n6 mg6 count" data-to="25">0</div><div class="l6">位研究者</div></div>
+        <div style="text-align:right">
+          <div class="n6 lm6 count" data-to="44">0</div><div class="l6">篇经验分享</div></div>
+      </div>
     </div>
     <div class="body">
-      <div class="reveal reveal-3" style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-        <div class="stat"><div class="n count" data-to="83">0</div><div class="lab">个调研课题</div></div>
-        <div class="stat m"><div class="n count" data-to="25">0</div><div class="lab">位研究者</div></div>
-        <div class="stat l"><div class="n count" data-to="44">0</div><div class="lab">篇经验分享</div></div>
-      </div>
-
-      <div class="reveal reveal-4" style="margin-top:14px;display:grid;grid-template-columns:.92fr 1.08fr;gap:14px;align-items:start">
+      <div class="reveal reveal-4" style="margin-top:16px;display:grid;grid-template-columns:.86fr 1.14fr;gap:16px;align-items:start">
         <div>
           <div class="vid">
             <video src="assets/neo4j-graph.mp4" poster="assets/neo4j-poster.jpg"
                    autoplay muted loop playsinline preload="metadata"></video>
             <div class="cap">Neo4j 图谱 · 193 节点 / 396 关系</div>
           </div>
-          <div class="linkbar" style="margin-top:12px;width:100%;justify-content:center;font-size:11.5px">
-            <span class="ico">◆</span>碳基生物 AI 学习小组
+          <div class="ph" style="margin-top:12px;aspect-ratio:4/3">
+            <img src="assets/eink-dashboard.jpg" alt="Claude 用量看板 · 墨水屏">
           </div>
         </div>
         <div>
-          <div class="photo-wall" style="grid-template-columns:1fr 1fr;gap:10px">
-            <div class="ph"><div class="phl">墨水屏用量看板<br/>图待补</div></div>
-            <div class="ph"><div class="phl">ESP32 声音波形<br/>图待补</div></div>
+          <div class="linkbar" style="width:100%;justify-content:center">
+            <span class="ico">◆</span>碳基生物 AI 学习小组
           </div>
-          <div class="chips" style="margin-top:12px">
+          <div class="chips" style="margin-top:14px">
             <div class="chip lm2">Neo4j · <b>Graph Engineering</b></div>
-            <div class="chip">AI 硬件 · <b>墨水屏看板</b></div>
-            <div class="chip mg2">ESP32-S3 · <b>声音可视化</b></div>
-            <div class="chip">WebGL · <b>流体噪声背景</b></div>
-            <div class="chip mg2"><b>曲名星</b> · 8 种策略起名</div>
+            <div class="chip">AI 硬件 · <b>墨水屏用量看板</b></div>
+            <div class="chip mg2"><b>Agent Platform</b></div>
+            <div class="chip"><b>Agent 测评</b></div>
+            <div class="chip lm2"><b>AI 网关</b></div>
+            <div class="chip mg2"><b>AI 护栏</b></div>
+            <div class="chip"><b>AI Design System</b></div>
             <div class="chip lm2"><b>SkillsHub</b> · 自托管技能中心</div>
+            <div class="chip mg2"><b>曲名星</b> · 8 种策略起名</div>
+            <div class="chip">WebGL · <b>流体噪声背景</b></div>
+            <div class="chip lm2"><b>10 倍速学习</b></div>
           </div>
-        </div>
-      </div>
-
-      <div class="cards c2 reveal reveal-5" style="margin-top:14px">
-        <div class="card gold">
-          <div class="ct"><span class="idx">A</span>有个优先级标签叫「不值得分享」</div>
-          <div class="cd">83 个课题里有 1 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
-        </div>
-        <div class="card cy">
-          <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天</div>
-          <div class="cd">10:00 开会沟通需求 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
+          <div class="card gold" style="margin-top:14px">
+            <div class="ct"><span class="idx">A</span>有个优先级标签叫「不值得分享」</div>
+            <div class="cd">83 个课题里有 1 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
+          </div>
+          <div class="card cy" style="margin-top:10px">
+            <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天</div>
+            <div class="cd">10:00 开会沟通需求 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
+          </div>
         </div>
       </div>
     </div>
@@ -742,9 +800,9 @@
       </div>
     </div>
     <div class="fw-stage reveal reveal-4">
-      <div class="fw-word xl nw" style="left:4%;top:4%;animation-delay:0s">Jev<span class="nb">09/15</span>
+      <div class="fw-word xl nw" style="left:4%;top:4%;animation-delay:0s">Jev
         <span class="fw-tip">前 OpenAI 研究员做的「System One 模型」——不生成文字，只输出结构化判断：选项、评分、0-1 概率。结构上无幻觉。</span></div>
-      <div class="fw-word lg nw" style="left:52%;top:2%;animation-delay:1.2s">Agentic AI<span class="nb">云栖</span>
+      <div class="fw-word lg nw" style="left:52%;top:2%;animation-delay:1.2s">Agentic AI
         <span class="fw-tip">2026 云栖大会的核心锚点。从「能回答」到「能自己把活干完」。</span></div>
       <div class="fw-word md" style="left:30%;top:18%;animation-delay:.6s">Harness
         <span class="fw-tip">由平台为模型配备工具、沙箱与执行循环，让 AI 真正动手。我们的 Agent 平台就是照这个思路建的。</span></div>
@@ -752,7 +810,7 @@
         <span class="fw-tip">Reinforcement Learning for Calibrated Decisions —— Jev 的训练方法，优化目标是「诚实的概率」，而不是 RLHF 的「人类偏好」。</span></div>
       <div class="fw-word lg" style="left:5%;top:30%;animation-delay:.3s">Vibe Coding
         <span class="fw-tip">凭「感觉」编程——描述意图给 AI，不再写每一行代码。我们 38 个应用基本都是这么来的。</span></div>
-      <div class="fw-word md nw" style="left:38%;top:36%;animation-delay:1.8s">团队智能体<span class="nb">09/15</span>
+      <div class="fw-word md nw" style="left:38%;top:36%;animation-delay:1.8s">团队智能体
         <span class="fw-tip">有独立身份、权限和记忆，能像同事一样加入群聊——AI 的服务对象从个人扩展到整个团队。</span></div>
       <div class="fw-word sm" style="left:74%;top:38%;animation-delay:.9s">MCP
         <span class="fw-tip">Model Context Protocol —— 让大模型连接外部工具与数据的标准协议。</span></div>
@@ -770,10 +828,16 @@
         <span class="fw-tip">时序知识图谱——给 Agent 一张可查询、可追溯的记忆，而不是把什么都塞进上下文。</span></div>
       <div class="fw-word sm mg" style="left:66%;top:76%;animation-delay:2.7s">龙虾 · OpenClaw
         <span class="fw-tip">红色龙虾图标的开源 Agent，GitHub star 破 25 万，"养龙虾"成为全网热梗——但也带出了「越自主 = 越有用 = 越危险」的龙虾悖论。</span></div>
-      <div class="fw-word sm" style="left:16%;top:86%;animation-delay:1.1s">Test-time Compute
+      <div class="fw-word sm" style="left:14%;top:84%;animation-delay:1.1s">Test-time Compute
         <span class="fw-tip">推理时算力——让模型「多想一会儿」，用算力换更好答案。</span></div>
-      <div class="fw-word md nw" style="left:50%;top:88%;animation-delay:2.2s">Token Foundry
+      <div class="fw-word md nw" style="left:44%;top:86%;animation-delay:2.2s">Token Foundry
         <span class="fw-tip">把「机器思考」当成可规模化生产的商品来经营。吴泳铭：未来机器思考总量将是人类的 1000 倍。</span></div>
+      <div class="fw-word lg" style="left:5%;top:18%;animation-delay:1.9s">韬<span style="font-size:.62em">τ</span> 定律
+        <span class="fw-tip">大模型规模 vs 性能的指数级关系——模型越大越聪明，但代价指数级上升。</span></div>
+      <div class="fw-word md mg" style="left:60%;top:18%;animation-delay:2.6s">CoT · 思维链
+        <span class="fw-tip">Chain-of-Thought——让模型「想给你看」再回答，推理质量显著提升。</span></div>
+      <div class="fw-word md nw" style="left:72%;top:86%;animation-delay:1.3s">RIS
+        <span class="fw-tip">待补充释义。</span></div>
     </div>
   </section>
 
@@ -877,29 +941,30 @@
   </section>
 
   <!-- ============ 11 · My questions for you ============ -->
-  <section class="slide brackets">
+  <section class="slide stars brackets">
+    <canvas id="starsCv"></canvas>
     <span class="br-bl"></span><span class="br-br"></span>
-    <div class="head">
-      <div class="eyebrow reveal reveal-1" style="letter-spacing:.34em">07 · OVER TO YOU</div>
-      <h2 class="q reveal reveal-2">My questions <em>for you</em></h2>
-    </div>
-    <div class="body">
-      <div class="bigq reveal reveal-3" style="margin-top:34px">
-        <div class="bq">
-          <div class="n">01</div>
-          <div class="t">哪些判断该交给模型，<br/>哪些必须留给代码？</div>
-        </div>
-        <div class="bq">
-          <div class="n">02</div>
-          <div class="t">你们见到过哪些<br/>有意思的 AI idea？</div>
-        </div>
-        <div class="bq">
-          <div class="n">03</div>
-          <div class="t">你们见过最贵的<br/>一个坑是什么？</div>
+    <div class="stars-inner">
+      <div class="head">
+        <div class="eyebrow reveal reveal-1" style="letter-spacing:.34em">07 · OVER TO YOU</div>
+        <h2 class="q reveal reveal-2">My questions <em>for you</em></h2>
+      </div>
+      <div class="body">
+        <div class="q5 reveal reveal-3">
+          <div class="qq"><div class="qn">01</div>
+            <div class="qt5">你们见到过哪些<br/><em>有意思的 AI idea</em>？</div></div>
+          <div class="qq"><div class="qn">02</div>
+            <div class="qt5">你们见过<em>最贵的一个坑</em><br/>是什么？</div></div>
+          <div class="qq"><div class="qn">03</div>
+            <div class="qt5"><em>FDE 最重要的能力</em>是什么？<br/>只能筛选，还是可以培养？</div></div>
+          <div class="qq"><div class="qn">04</div>
+            <div class="qt5">现在的工作，<br/>最让你<em>兴奋</em>的 part 是什么？</div></div>
+          <div class="qq wide"><div class="qn">05</div>
+            <div class="qt5">在这样快速变化的 AI Era，你有怎样的<em>担心和困惑</em>吗？</div></div>
         </div>
       </div>
+      <div class="note reveal reveal-5">// 谢谢各位 —— 这些坑，希望能帮你们少走一段路。&nbsp;&nbsp;<b>CHEN GAO · GLP</b></div>
     </div>
-    <div class="note reveal reveal-5">// 谢谢各位 —— 这些坑，希望能帮你们少走一段路。&nbsp;&nbsp;<b>CHEN GAO · GLP</b></div>
   </section>
 
 </div>
@@ -908,6 +973,591 @@
 <div class="hint" id="page-num">01 <b>/ 11</b></div>
 
 <script>
+/* ============ ocean · water ripple (prism/ocean) ============ */
+
+function initOcean(){
+  const canvas = document.getElementById('oceanGl');
+  const gl = canvas.getContext('webgl2', {antialias:false, alpha:false});
+  if(!gl){ window.__oceanFailed=true; return; }
+  const ext = gl.getExtension('EXT_color_buffer_float'); // 需要可渲染的浮点纹理
+
+  // ---------- 着色器工具 ----------
+  function sh(type, src){
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(s);
+    return s;
+  }
+  function prog(vs, fs){
+    const p = gl.createProgram();
+    gl.attachShader(p, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(p);
+    if(!gl.getProgramParameter(p, gl.LINK_STATUS)) throw gl.getProgramInfoLog(p);
+    return p;
+  }
+
+  const VERT = `#version 300 es
+  in vec2 pos; out vec2 uv;
+  void main(){ uv = pos*0.5+0.5; gl_Position = vec4(pos,0.0,1.0); }`;
+
+  // 水面高度场更新：波动方程 + 阻尼；R=当前高度，G=前一帧高度
+  const SIM = `#version 300 es
+  precision highp float;
+  in vec2 uv; out vec2 outColor;
+  uniform sampler2D u_prev;
+  uniform vec2 u_res;          // 模拟纹理尺寸(像素)
+  uniform vec2 u_mouse;        // 鼠标位置(uv), -1 表示无
+  uniform vec2 u_pmouse;       // 上一帧鼠标位置
+  uniform float u_down;        // 落点强度
+  uniform float u_radius;      // 落点半径(像素)
+  uniform float u_damp;        // 阻尼 0..1
+  uniform vec4 u_splash;       // 落点水花(跃鱼/点击): xy=位置(uv) z=强度 w=半径(像素)
+  void main(){
+    vec2 t = 1.0/u_res;
+    float c = texture(u_prev, uv).r;
+    float p = texture(u_prev, uv).g;
+    float l = texture(u_prev, uv - vec2(t.x,0.0)).r;
+    float r = texture(u_prev, uv + vec2(t.x,0.0)).r;
+    float u = texture(u_prev, uv - vec2(0.0,t.y)).r;
+    float d = texture(u_prev, uv + vec2(0.0,t.y)).r;
+    float n = (l+r+u+d)*0.5 - p;   // 波动方程离散形式
+    n *= u_damp;
+
+    // 沿鼠标移动轨迹注入涟漪（对线段取最近点，避免快速移动出现断点）
+    if(u_mouse.x >= 0.0){
+      vec2 P = uv*u_res, A = u_pmouse*u_res, B = u_mouse*u_res;
+      vec2 AB = B-A; float len2 = max(dot(AB,AB), 1e-4);
+      float h = clamp(dot(P-A,AB)/len2, 0.0, 1.0);
+      float dist = distance(P, A + AB*h);
+      n += u_down * exp(-(dist*dist)/(u_radius*u_radius));
+    }
+
+    // 落点水花（跃鱼 / 点击）
+    if(u_splash.z > 0.0){
+      float ds = distance(uv*u_res, u_splash.xy*u_res);
+      n += u_splash.z * exp(-(ds*ds)/(u_splash.w*u_splash.w));
+    }
+    outColor = vec2(clamp(n,-1.5,1.5), c);
+  }`;
+
+  // 渲染：由高度场梯度得到法线，折射彩色渐变背景，并叠加高光
+  const RENDER = `#version 300 es
+  precision highp float;
+  in vec2 uv; out vec4 fragColor;
+  uniform sampler2D u_field;
+  uniform vec2 u_res;
+  uniform float u_time;
+  uniform vec2 u_aspect;
+  uniform vec2 u_rmouse;    // 鼠标位置(uv, 与涟漪同坐标)
+  uniform float u_mact;     // 鼠标活跃度 0..1，停下后衰减
+  uniform vec4 u_jump;      // 跃出水面的鱼: xy=位置(uv) z=朝向(rad) w=激活(0/1)
+  uniform vec3 u_sonar;     // 声呐: xy=中心(uv) z=年龄(秒), <0 无
+
+  // ——海面之上：俯瞰阳光海面 + 形态各异的海洋生物——
+  float hash(float n){ return fract(sin(n*127.13)*43758.5453); }
+
+  // 受惊躲避：生物离鼠标越近，越沿反方向被推开（幅度随活跃度衰减）
+  vec2 flee(vec2 c, float A){
+    vec2 d = c - u_rmouse;
+    float dist = length(vec2(d.x*A, d.y));
+    float f = smoothstep(0.30, 0.0, dist) * u_mact;
+    vec2 dir = dist > 1e-4 ? normalize(vec2(d.x*A, d.y)) : vec2(1.0, 0.0);
+    return c + vec2(dir.x/A, dir.y) * f * 0.09;
+  }
+
+  // 海水底色：随「昼夜」极慢循环 晨(青)→午(亮蓝)→昏(金橙)
+  vec3 seaSurface(vec2 p, float t){
+    float ph = fract(t*0.008);                 // 约 125 秒一轮
+    vec3 dmorn=vec3(0.02,0.22,0.38), smorn=vec3(0.10,0.52,0.60);  // 清晨
+    vec3 dnoon=vec3(0.03,0.28,0.48), snoon=vec3(0.14,0.60,0.72);  // 正午
+    vec3 ddusk=vec3(0.11,0.15,0.28), sdusk=vec3(0.52,0.44,0.33);  // 黄昏
+    vec3 dcol, scol; float s = ph*3.0;
+    if(s < 1.0)       { dcol=mix(dmorn,dnoon,s);      scol=mix(smorn,snoon,s); }
+    else if(s < 2.0)  { float u=s-1.0; dcol=mix(dnoon,ddusk,u); scol=mix(snoon,sdusk,u); }
+    else              { float u=s-2.0; dcol=mix(ddusk,dmorn,u); scol=mix(sdusk,smorn,u); }
+    float v = 0.5 + 0.5*sin(p.x*2.3 + t*0.15) * sin(p.y*2.7 - t*0.11);
+    vec3 col = mix(dcol, scol, v);
+    col *= mix(0.82, 1.08, smoothstep(0.0, 1.0, p.y));   // 顶亮底沉
+    return col;
+  }
+
+  float ell(vec2 p, vec2 r){                       // 椭圆遮罩
+    float d = dot(p/r, p/r);
+    return smoothstep(1.03, 0.85, d);
+  }
+  float segDist(vec2 p, vec2 a, vec2 b){           // 点到线段距离
+    vec2 pa = p-a, ba = b-a;
+    float h = clamp(dot(pa,ba)/max(dot(ba,ba),1e-5), 0.0, 1.0);
+    return length(pa - ba*h);
+  }
+
+  // 鲸鱼：前粗后细的水滴身 + 钝头 + 背鳍 + 胸鳍 + 宽尾叶（面朝 +x）
+  float whale(vec2 p, float wag){
+    p.y -= wag*0.04*smoothstep(0.4,-1.1,p.x);                  // 尾部摆动更大
+    // 身体：用水平剖面画，前端饱满、尾柄收细
+    float halfH = 0.37 * pow(max(0.0, 1.0 - pow((p.x-0.02)/0.90, 2.0)), 0.60);
+    halfH *= mix(0.42, 1.0, smoothstep(-0.92, -0.12, p.x));    // 越往尾越细
+    float body = smoothstep(0.025, -0.015, abs(p.y + 0.04) - halfH)
+               * step(-0.92, p.x) * step(p.x, 0.95);
+    // 头顶到嘴的微弧已由剖面体现；再补一点下颌线条使头更钝
+    body = max(body, ell(p - vec2(0.66,-0.10), vec2(0.26,0.20)));
+    // 背鳍（小驼峰，偏后）
+    float dorsal = ell(p - vec2(-0.22, 0.28), vec2(0.18, 0.12)) * step(0.24, p.y);
+    // 胸鳍（腹侧后掠）
+    float flip = smoothstep(0.06, 0.0, segDist(p, vec2(0.30,-0.16), vec2(0.00,-0.48)));
+    // 尾叶：向后张开的宽尾（根细尖宽）
+    vec2 fp = p - vec2(-0.82,-0.02);
+    float sp = clamp((-fp.x)/0.36, 0.0, 1.0);
+    float fluke = smoothstep(0.03, 0.0, abs(fp.y) - (sp*0.34 + 0.02))
+                * step(-0.40, fp.x) * step(fp.x, 0.06);
+    return clamp(max(max(body,dorsal), max(flip,fluke)), 0.0, 1.0);
+  }
+
+  // 小鱼（跟随鲸鱼）：圆身 + 扇尾
+  float smallFish(vec2 p, float wag){
+    p.y -= wag*0.14*smoothstep(0.2,-0.7,p.x);
+    float body = ell(p, vec2(0.5,0.30));
+    vec2 tp = p - vec2(-0.46,0.0);
+    float tail = smoothstep(0.03,0.0, abs(tp.y) - (-tp.x*0.9))
+               * step(-0.42, tp.x)*step(tp.x, 0.0);
+    return clamp(max(body, tail), 0.0, 1.0);
+  }
+
+  // 水母：半圆钟伞 + 飘动触须（面朝 +y 上）
+  float jelly(vec2 p, float pulse){
+    float bw = 0.52*(1.0 + 0.10*pulse);
+    float bh = 0.40*(1.0 - 0.10*pulse);
+    float dome = ell(p, vec2(bw,bh)) * smoothstep(-0.14, 0.03, p.y);   // 只留上半伞
+    float tent = 0.0;
+    for(int k=0;k<5;k++){
+      float fk = float(k) - 2.0;
+      float x0 = fk*0.12;
+      float sway = 0.07*sin(p.y*7.0 + pulse*2.0 + fk*1.3);
+      float d = segDist(p, vec2(x0,-0.02), vec2(x0*1.4 + sway, -0.95));
+      tent = max(tent, smoothstep(0.028,0.0,d));
+    }
+    return clamp(max(dome, tent), 0.0, 1.0);
+  }
+
+  // 箭鱼/旗鱼：纺锤身收尖 + 长剑吻 + 帆状背鳍 + 胸鳍 + 新月叉尾（面朝 +x）
+  float swordfish(vec2 p, float wag){
+    p.y -= wag*0.05*smoothstep(0.3,-1.0,p.x);
+    // 纺锤身，两端收尖
+    float halfH = 0.16 * pow(max(0.0, 1.0 - pow((p.x+0.02)/0.86, 2.0)), 0.70);
+    float body = smoothstep(0.02, -0.012, abs(p.y) - halfH)
+               * step(-0.90, p.x) * step(p.x, 0.88);
+    // 长剑吻（细尖）
+    float sword = smoothstep(0.018, 0.0, abs(p.y) - (1.55 - p.x)*0.042)
+                * step(0.70, p.x) * step(p.x, 1.55);
+    // 帆状背鳍（前段升起的高帆）
+    float dors = smoothstep(0.045, 0.0, segDist(p, vec2(0.30,0.10), vec2(-0.04,0.44)))
+               * step(0.09, p.y);
+    // 胸鳍
+    float pect = smoothstep(0.035, 0.0, segDist(p, vec2(0.12,-0.09), vec2(-0.16,-0.32)));
+    // 新月叉尾（上下两尖）
+    vec2 tp = p - vec2(-0.82,0.0);
+    float up = smoothstep(0.035, 0.0, segDist(tp, vec2(0.0,0.0), vec2(-0.24,0.30)));
+    float dn = smoothstep(0.035, 0.0, segDist(tp, vec2(0.0,0.0), vec2(-0.24,-0.30)));
+    float tail = max(up,dn) * step(-0.30, tp.x) * step(tp.x, 0.06);
+    return clamp(max(max(max(body,sword),dors), max(pect,tail)), 0.0, 1.0);
+  }
+
+  // 灯笼鱼(鮟鱇)：大头圆身向后收细 + 小尾 + 背鳍 + 弯曲钓竿（灯泡/腹部光点在场景里发光；面朝 +x）
+  float lantern(vec2 p, float wag){
+    p.y -= wag*0.07*smoothstep(0.1,-0.6,p.x);
+    // 前端(头)饱满、向尾收细
+    float halfH = 0.42 * pow(max(0.0, 1.0 - pow((p.x-0.10)/0.66, 2.0)), 0.52);
+    halfH *= mix(0.38, 1.0, smoothstep(-0.62, 0.02, p.x));
+    float body = smoothstep(0.02, -0.012, abs(p.y + 0.02) - halfH)
+               * step(-0.62, p.x) * step(p.x, 0.74);
+    // 尾鳍
+    vec2 tp = p - vec2(-0.52,0.0);
+    float tail = smoothstep(0.03, 0.0, abs(tp.y) - (-tp.x*0.9))
+               * step(-0.44, tp.x) * step(tp.x, 0.0);
+    // 背鳍
+    float dors = smoothstep(0.05, 0.0, segDist(p, vec2(0.02,0.30), vec2(-0.26,0.30)))
+               * step(0.26, p.y);
+    // 钓竿：从头顶弯向前上方（两段折线近似弧线）
+    float rod = smoothstep(0.016, 0.0, segDist(p, vec2(0.34,0.36), vec2(0.60,0.54)));
+    rod = max(rod, smoothstep(0.016, 0.0, segDist(p, vec2(0.60,0.54), vec2(0.82,0.46))));
+    return clamp(max(max(body,tail), max(dors,rod)), 0.0, 1.0);
+  }
+
+  void main(){
+    vec2 t = 1.0/u_res;
+    float hL = texture(u_field, uv - vec2(t.x,0.0)).r;
+    float hR = texture(u_field, uv + vec2(t.x,0.0)).r;
+    float hU = texture(u_field, uv - vec2(0.0,t.y)).r;
+    float hD = texture(u_field, uv + vec2(0.0,t.y)).r;
+    vec2 grad = vec2(hR-hL, hD-hU);               // 交互涟漪产生的水面斜率
+    float tm = u_time;
+    float A = u_aspect.x / u_aspect.y;            // 宽高比，用于校正形状
+
+    // 环境涌浪 + 细密水纹：即使鼠标静止，海面也持续荡漾（保留 Luma 的常驻微涟漪）
+    vec2 amb = vec2(
+      sin(uv.x*3.0 + tm*0.30) + 0.6*sin(uv.y*5.1 - tm*0.22),
+      cos(uv.y*3.3 - tm*0.26) + 0.6*sin(uv.x*4.4 + tm*0.19)
+    ) * 0.010;
+    amb += vec2(sin(uv.y*13.0 + tm*0.6), sin(uv.x*11.0 - tm*0.5)) * 0.0045;   // 中频浪纹
+    amb += vec2(sin(uv.y*30.0 + tm*1.0), sin(uv.x*27.0 - tm*0.85)) * 0.0020;  // 细密涟漪
+    grad += amb;
+
+    vec2 refr = uv - grad * 0.45;                 // 水面折射（减弱，涟漪更克制）
+    vec3 col = seaSurface(refr, tm);
+
+    // — 上帝之光：从上方斜射的体积光束，缓慢摆动，顶强底弱 —
+    float rays = 0.0;
+    for(int k=0; k<3; k++){
+      float fk = float(k);
+      float coord = (uv.x*0.7 + uv.y*(0.18+0.05*fk)) * (7.0+3.0*fk)
+                  + sin(tm*0.13 + fk)*0.7 + fk*11.0;
+      rays += pow(max(sin(coord),0.0), 7.0) * (0.5 - 0.12*fk);
+    }
+    col += rays * smoothstep(0.0,0.85,uv.y) * vec3(0.35,0.62,0.82) * 0.11;
+
+    // ===== 海面下的生物（由远及近逐个绘制）=====
+    float FS = 0.34;   // 全局体型比例：所有生物统一缩放，改这一个数即可
+
+    // — 灯笼鱼：很慢，带发光钓灯，两条一左一右 —
+    for(int g=0; g<2; g++){
+      float fg = float(g);
+      float dir = (g==0) ? 1.0 : -1.0;
+      float tv  = fract(0.5*fg + tm*0.006);                       // 极慢
+      float xx  = (dir>0.0) ? mix(-0.25,1.25,tv) : mix(1.25,-0.25,tv);
+      vec2  lc  = flee(vec2(xx, 0.80 - 0.07*fg), A);
+      float lsz = 0.115 * FS;
+      vec2  llp = (refr - lc); llp.x *= A; llp.x *= dir; llp /= lsz;
+      float lm  = lantern(llp, sin(tm*3.0 + fg));
+      col = mix(col, vec3(0.02,0.06,0.10), lm*0.75);
+      float flick = 0.72 + 0.28*sin(tm*5.0 + fg*2.0);             // 灯泡闪烁
+      float glow  = exp(-dot(llp-vec2(0.84,0.46), llp-vec2(0.84,0.46))*11.0);
+      col += glow * vec3(1.0,0.80,0.38) * 0.8 * flick;           // 钓竿灯泡
+      // 腹部三颗生物荧光点
+      for(int b=0; b<3; b++){
+        vec2 bp = vec2(0.18 - 0.22*float(b), -0.30);
+        float bg = exp(-dot(llp-bp, llp-bp)*36.0);
+        col += bg * vec3(0.35,0.85,0.95) * 0.35 * flick;
+      }
+    }
+
+    // — 两只水母结伴，缓慢上下起伏、伞体收缩 —
+    for(int j=0; j<2; j++){
+      float fj = float(j);
+      vec2  jc = flee(vec2(0.60 + 0.11*fj + 0.03*sin(tm*0.25 + fj*3.0),
+                           0.55 + 0.10*sin(tm*0.5  + fj*2.0)), A);
+      float jsz = 0.13 * FS;
+      vec2  jlp = (refr - jc); jlp.x *= A; jlp /= jsz;
+      float pulse = sin(tm*1.6 + fj*1.7);
+      float jm = jelly(jlp, pulse);
+      col = mix(col, vec3(0.62,0.78,0.88), jm*0.22);              // 半透明偏亮
+      float jglow = exp(-dot(jlp,jlp)*1.6) * (0.5 + 0.3*pulse);
+      col += jglow * vec3(0.25,0.45,0.55) * 0.18;
+    }
+
+    // — 鲸鱼 + 尾随的一小群鱼 —
+    {
+      float tv = fract(0.15 + tm*0.010);                          // 缓慢巡游
+      vec2  wc = flee(vec2(mix(-0.45,1.45,tv), 0.34 + 0.02*sin(tm*0.3)), A);
+      float wsz = 0.21 * FS;
+      vec2  wlp = (refr - wc); wlp.x *= A; wlp /= wsz;
+      float wm = whale(wlp, sin(tm*1.5));
+      col = mix(col, vec3(0.02,0.09,0.14), wm*0.82);
+      for(int s=0; s<4; s++){                                     // 4 条小鱼跟随
+        float fs = float(s);
+        vec2 off = vec2(-0.36 - 0.13*fs,
+                        0.11 + 0.05*sin(tm*2.2 + fs*2.0) + (fs-1.5)*0.055) * FS;
+        vec2 sc = wc + off;
+        float ssz = 0.045 * FS;
+        vec2 slp = (refr - sc); slp.x *= A; slp /= ssz;
+        float sm = smallFish(slp, sin(tm*7.0 + fs*1.5));
+        col = mix(col, vec3(0.04,0.13,0.18), sm*0.6);
+      }
+    }
+
+    // — 箭鱼：细长、极快，横冲而过 —
+    for(int q=0; q<2; q++){
+      float fq = float(q);
+      float dir = (q==0) ? 1.0 : -1.0;
+      float tv  = fract(0.35*fq + tm*0.075);                      // 快
+      float xx  = (dir>0.0) ? mix(-0.35,1.35,tv) : mix(1.35,-0.35,tv);
+      vec2  xc  = flee(vec2(xx, 0.20 + 0.44*fq), A);
+      float xsz = 0.092 * FS;
+      vec2  xlp = (refr - xc); xlp.x *= A; xlp.x *= dir; xlp /= xsz;
+      float xm  = swordfish(xlp, sin(tm*10.0 + fq));
+      col = mix(col, vec3(0.03,0.10,0.15), xm*0.72);
+    }
+
+    // — #9 小鱼群 school：一簇小鱼结伴巡游（整群一起躲避）—
+    {
+      float tvS = fract(0.6 + tm*0.03);
+      vec2 sc0 = flee(vec2(mix(1.2,-0.2,tvS), 0.46 + 0.05*sin(tm*0.5)), A);   // 向左游
+      for(int s=0; s<9; s++){
+        float fs = float(s);
+        vec2 off = vec2((mod(fs,3.0)-1.0)*0.05 + 0.02*sin(tm*3.0+fs),
+                        (floor(fs/3.0)-1.0)*0.042 + 0.015*cos(tm*2.5+fs));
+        vec2 slp = (refr - (sc0+off)); slp.x *= A; slp.x *= -1.0; slp /= 0.020;
+        float sm = smallFish(slp, sin(tm*9.0 + fs*1.3));
+        col = mix(col, vec3(0.05,0.14,0.19), sm*0.5);
+      }
+    }
+
+    // — 气泡：自下而上、轻微摇曳，接近水面淡出 —
+    for(int i=0; i<14; i++){
+      float fi   = float(i);
+      float sp   = 0.028 + 0.055*hash(fi+31.7);                 // 上升速度
+      float rise = fract(hash(fi+13.3) + tm*sp);                // 0=底 → 1=水面
+      float bx   = fract(hash(fi+7.1) + 0.025*sin(tm*1.3 + fi*2.0));  // 横向 + 摇曳
+      float bsz  = 0.005 + 0.011*hash(fi+19.9);                 // 半径(uv)
+      vec2  dd   = (refr - vec2(bx, rise)); dd.x *= A;
+      float d    = length(dd)/bsz;
+      float fade = smoothstep(0.0,0.08,rise) * smoothstep(1.0,0.82,rise) * 0.7;
+      float ring = smoothstep(1.05,0.86,d) - smoothstep(0.86,0.5,d);   // 气泡边
+      col += max(ring,0.0) * fade * vec3(0.55,0.82,1.0) * 0.6;
+      float hl = smoothstep(bsz*0.5, 0.0, length(dd - vec2(-0.32,0.34)*bsz));  // 左上高光
+      col += hl * fade * vec3(0.85,0.95,1.0) * 0.55;
+    }
+
+    // — 跃出水面的鱼：沿弧线飞跃，比水下亮一点（离开水面）—
+    if(u_jump.w > 0.5){
+      vec2 jp = (refr - u_jump.xy); jp.x *= A;
+      float ca = cos(u_jump.z), sa = sin(u_jump.z);
+      jp = mat2(ca, -sa, sa, ca) * jp;            // 旋转到朝向
+      jp /= 0.052;
+      float jm = smallFish(jp, sin(tm*22.0));
+      col = mix(col, vec3(0.07,0.16,0.22), jm*0.85);
+      col += jm * vec3(0.5,0.75,0.95) * 0.18;     // 出水的高光
+    }
+
+    // — #7 景深水雾：越靠上(越远)越蒙一层水雾，生物更淡更虚，增强纵深 —
+    float haze = smoothstep(0.32, 1.0, uv.y);
+    vec3 hazeCol = seaSurface(refr, tm)*1.22 + vec3(0.02,0.05,0.07);
+    col = mix(col, hazeCol, haze*0.26);
+
+    // — 生物荧光：被扰动的海水泛起蓝绿微光（鼠标划过 / 水花溅起处发光）—
+    float h0 = texture(u_field, uv).r;
+    col += smoothstep(0.05, 0.28, abs(h0)) * vec3(0.16,0.85,0.72) * 0.55;
+
+    // — 声呐 ping：点击处扩散的光环，扫过的鱼被点亮（暗色鱼身叠上青光=发亮）—
+    if(u_sonar.z >= 0.0){
+      vec2 sc = (uv - u_sonar.xy); sc.x *= A;
+      float dist = length(sc);
+      float ringR = u_sonar.z * 0.55;                       // 扩散速度
+      float band  = exp(-pow((dist - ringR)/0.018, 2.0));   // 细亮环
+      float fade  = smoothstep(1.3, 0.0, u_sonar.z);        // ~1.3s 消散
+      col += band * fade * vec3(0.35,0.92,0.98) * 0.95;
+    }
+
+    // — 一星在水：一颗闪烁的星 + 水中随波晃动的倒影 —
+    vec2 starP = vec2(0.71, 0.80);
+    vec2 sdv = (uv - starP); sdv.x *= A;
+    float twk = max(0.0, 0.34 + 0.34*sin(tm*2.4)*sin(tm*1.3+1.0));   // 更暗、时隐时现
+    float core = exp(-dot(sdv,sdv)/0.00006);
+    float crx = exp(-pow(sdv.x/0.0013,2.0))*exp(-pow(sdv.y/0.05,2.0))
+              + exp(-pow(sdv.y/0.0013,2.0))*exp(-pow(sdv.x/0.05,2.0));
+    col += (core*0.55 + crx*0.20) * twk * vec3(0.85,0.92,1.0);
+
+    // 阳光波光：波峰迎光处的高光碎钻
+    vec3 normal = normalize(vec3(-grad*3.5, 1.0));
+    vec3 lightDir = normalize(vec3(0.25, 0.5, 0.83));
+    float spec = pow(max(dot(normal, lightDir), 0.0), 90.0);
+    col += vec3(1.0, 1.0, 0.92) * spec * 0.9;            // 太阳的白金色闪点（减弱）
+    col += length(grad) * 0.5 * vec3(0.5,0.85,1.0);      // 涟漪亮边（大幅减弱）
+
+    // 柔和暗角
+    float vig = smoothstep(1.30, 0.35, length((uv-0.5)*vec2(1.05,1.0)));
+    col *= mix(0.80, 1.06, vig);
+
+    fragColor = vec4(col, 1.0);
+  }`;
+
+  const simProg = prog(VERT, SIM);
+  const renderProg = prog(VERT, RENDER);
+
+  // 全屏三角形
+  const vao = gl.createVertexArray();
+  gl.bindVertexArray(vao);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  const locSim = gl.getAttribLocation(simProg, 'pos');
+  const locRen = gl.getAttribLocation(renderProg, 'pos');
+
+  // ---------- ping-pong 浮点纹理 ----------
+  let SIM_W, SIM_H, texA, texB, fboA, fboB;
+  function makeTex(w,h){
+    const tx = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tx);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RG16F, w, h, 0, gl.RG, gl.HALF_FLOAT, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    return tx;
+  }
+  function makeFbo(tx){
+    const fb = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tx, 0);
+    return fb;
+  }
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width  = Math.floor(innerWidth*dpr);
+    canvas.height = Math.floor(innerHeight*dpr);
+    // 模拟分辨率适当降采样以保证性能，最长边不超过 900
+    const scale = Math.min(1, 900/Math.max(canvas.width, canvas.height));
+    SIM_W = Math.max(2, Math.floor(canvas.width*scale*0.6));
+    SIM_H = Math.max(2, Math.floor(canvas.height*scale*0.6));
+    texA = makeTex(SIM_W,SIM_H); fboA = makeFbo(texA);
+    texB = makeTex(SIM_W,SIM_H); fboB = makeFbo(texB);
+    // 清零
+    for(const fb of [fboA,fboB]){
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+      gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ---------- 输入 ----------
+  let mouse = {x:-1,y:-1}, pmouse={x:-1,y:-1}, active=false, moved=false;
+  function setPos(clientX, clientY){
+    const nx = clientX/innerWidth, ny = clientY/innerHeight;
+    pmouse = active ? {x:mouse.x,y:mouse.y} : {x:nx,y:ny};
+    mouse = {x:nx, y:ny}; active = true; moved = true;   // 仅本帧真正移动时注入
+  }
+  addEventListener('mousemove', e=>setPos(e.clientX, e.clientY));
+  addEventListener('mouseleave', ()=>{active=false; mouse={x:-1,y:-1};});
+  addEventListener('touchmove', e=>{
+    const t=e.touches[0]; if(t) setPos(t.clientX,t.clientY);
+    e.preventDefault();
+  }, {passive:false});
+  addEventListener('touchstart', e=>{
+    const t=e.touches[0]; if(t) setPos(t.clientX,t.clientY);
+  });
+  // #8 点击/触击 = 大水花
+  let clickX=0, clickY=0, clickAt=-1;
+  addEventListener('pointerdown', e=>{
+    clickX=e.clientX/innerWidth; clickY=e.clientY/innerHeight;
+    clickAt=(performance.now()-start)/1000;
+  });
+
+  // ---------- 主循环 ----------
+  const u = {
+    prev: gl.getUniformLocation(simProg,'u_prev'),
+    res:  gl.getUniformLocation(simProg,'u_res'),
+    mouse:gl.getUniformLocation(simProg,'u_mouse'),
+    pmouse:gl.getUniformLocation(simProg,'u_pmouse'),
+    down: gl.getUniformLocation(simProg,'u_down'),
+    radius:gl.getUniformLocation(simProg,'u_radius'),
+    damp: gl.getUniformLocation(simProg,'u_damp'),
+    splash:gl.getUniformLocation(simProg,'u_splash'),
+  };
+  const r = {
+    field:gl.getUniformLocation(renderProg,'u_field'),
+    res:  gl.getUniformLocation(renderProg,'u_res'),
+    time: gl.getUniformLocation(renderProg,'u_time'),
+    aspect:gl.getUniformLocation(renderProg,'u_aspect'),
+    rmouse:gl.getUniformLocation(renderProg,'u_rmouse'),
+    mact: gl.getUniformLocation(renderProg,'u_mact'),
+    jump: gl.getUniformLocation(renderProg,'u_jump'),
+    sonar:gl.getUniformLocation(renderProg,'u_sonar'),
+  };
+
+  let read=texA, readFbo=fboA, write=texB, writeFbo=fboB;
+  let mact = 0;                       // 鼠标活跃度：鱼受惊躲避用
+  const start = performance.now();
+
+  function frame(now){
+    if(!window.__oceanRun) return;
+    const time = (now-start)/1000;
+    const asp = canvas.width/canvas.height;
+
+    // 仅在鼠标/触摸「本帧移动」时注入涟漪；停下即不再灌能量，避免原地积成大圆点
+    let mx=mouse.x, my=mouse.y, pmx=pmouse.x, pmy=pmouse.y;
+    const inject = active && moved;
+    let down = inject ? 0.22 : 0.0;              // 涟漪强度：克制、贴近 Luma
+    moved = false;                                // 消费掉本帧的移动标记
+    if(inject) mact = 1.0;                        // 划动→活跃；静止→逐帧衰减
+    mact *= 0.96;                                 // 鱼受惊后慢慢平复
+
+    const maxd = Math.max(SIM_W, SIM_H);
+    const fr = x => x - Math.floor(x);
+
+    // #6 跃鱼：每 JP 秒一次，沿抛物线飞跃约 1.7s，落点砸出水花
+    const JP = 8.5, DUR = 1.7;
+    const jt = fr(time/JP) * JP;
+    let jx=0, jy=0, jang=0, jAct=0, sx=0, sy=0, samp=0;
+    if(jt < DUR){
+      const seed = Math.floor(time/JP);
+      const dir  = (fr(seed*0.37) < 0.5) ? 1 : -1;
+      const x0   = 0.20 + 0.60*fr(seed*0.713);
+      const span = 0.18*dir;
+      const yB   = 0.58 + 0.16*fr(seed*1.91);
+      const pr   = jt/DUR;                          // 0..1
+      jx = x0 + span*pr;
+      jy = yB + 0.16*4.0*pr*(1.0-pr);              // 抛物线上跃
+      jang = Math.atan2(0.16*4.0*(1.0-2.0*pr), span*asp);   // 朝向=速度方向
+      jAct = 1;
+      samp = 0.34*Math.exp(-Math.pow(pr-0.95,2)/0.0016);   // 落回瞬间的水花
+      sx = x0 + span*0.95; sy = yB;
+    }
+    // #8 点击大水花：短促强脉冲，覆盖跃鱼水花
+    let spx=sx, spy=sy, spa=samp, spr=maxd*0.012;
+    if(clickAt >= 0){
+      const cdt = time - clickAt;
+      if(cdt >= 0 && cdt < 0.05){ spx=clickX; spy=clickY; spa=0.6; spr=maxd*0.022; }
+    }
+
+    // --- 模拟步 ---
+    gl.bindFramebuffer(gl.FRAMEBUFFER, writeFbo);
+    gl.viewport(0,0,SIM_W,SIM_H);
+    gl.useProgram(simProg);
+    gl.bindVertexArray(vao);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.enableVertexAttribArray(locSim);
+    gl.vertexAttribPointer(locSim,2,gl.FLOAT,false,0,0);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, read);
+    gl.uniform1i(u.prev,0);
+    gl.uniform2f(u.res, SIM_W, SIM_H);
+    gl.uniform2f(u.mouse, mx, my);
+    gl.uniform2f(u.pmouse, pmx, pmy);
+    gl.uniform1f(u.down, down);
+    gl.uniform1f(u.radius, maxd*0.010);
+    gl.uniform1f(u.damp, 0.978);   // 阻尼更强，涟漪更快消散，不拖泥带水
+    gl.uniform4f(u.splash, spx, spy, spa, spr);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+
+    // --- 渲染步 ---
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.useProgram(renderProg);
+    gl.enableVertexAttribArray(locRen);
+    gl.vertexAttribPointer(locRen,2,gl.FLOAT,false,0,0);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, write);
+    gl.uniform1i(r.field,0);
+    gl.uniform2f(r.res, SIM_W, SIM_H);
+    gl.uniform1f(r.time, time);
+    gl.uniform2f(r.aspect, asp>=1?asp:1, asp>=1?1:1/asp);
+    gl.uniform2f(r.rmouse, mouse.x, mouse.y);   // 与涟漪同坐标
+    gl.uniform1f(r.mact, mact);
+    gl.uniform4f(r.jump, jx, jy, jang, jAct);
+    let sonarAge = -1.0;
+    if(clickAt >= 0){ const a = time - clickAt; if(a >= 0 && a < 1.3) sonarAge = a; }
+    gl.uniform3f(r.sonar, clickX, clickY, sonarAge);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+
+    // 交换缓冲
+    [read,write]=[write,read]; [readFbo,writeFbo]=[writeFbo,readFbo];
+    requestAnimationFrame(frame);
+  }
+  window.__oceanResume=function(){ requestAnimationFrame(frame); };
+  window.__oceanRun=true; requestAnimationFrame(frame);
+}
+
 /* ============ deck control ============ */
 const slides = document.querySelectorAll('.slide');
 const ticks  = document.getElementById('ticks');
@@ -936,6 +1586,8 @@ function render(){
   });
   pageNum.innerHTML = pad(current+1)+' <b>/ '+pad(total)+'</b>';
   countUp(slides[current]);
+  toggleOcean(current===0);
+  toggleStars(current===total-1);
 }
 function countUp(slide){
   if(REDUCED) return;
@@ -947,6 +1599,91 @@ function countUp(slide){
       if(p<1) requestAnimationFrame(step); else el.textContent=to.toLocaleString();
     });
   });
+}
+
+/* ============ constellation background (prism/constellation) ============ */
+function initStars(){
+  const cv=document.getElementById('starsCv'); if(!cv) return;
+  const ctx=cv.getContext('2d'); if(!ctx) return;
+  let W,H,DPR,P=[],neb=[],shoot=[],t=0,shootT=2;
+  const rand=(a,b)=>a+Math.random()*(b-a);
+  function build(){
+    DPR=Math.min(devicePixelRatio||1,2); W=cv.clientWidth||innerWidth; H=cv.clientHeight||innerHeight;
+    cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+    P=[]; const n=Math.round(W*H/16000);
+    for(let i=0;i<n;i++) P.push({x:Math.random()*W,y:Math.random()*H,
+      vx:rand(-.22,.22),vy:rand(-.22,.22),r:.6+Math.random()*1.4,tw:rand(0,6.28)});
+    neb=['120,150,255','90,220,200','220,130,210'].map(c=>({
+      x:rand(0,W),y:rand(0,H),vx:rand(-.07,.07),vy:rand(-.07,.07),c:c}));
+  }
+  addEventListener('resize',()=>{ if(window.__starsRun) build(); });
+  build();
+  let mx=-999,my=-999;
+  cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});
+  cv.addEventListener('pointerleave',()=>{mx=my=-999;});
+  const R=130,R2=R*R,LINK=34,LINK2=LINK*LINK;
+  function frame(){
+    if(!window.__starsRun) return;
+    t+=0.016;
+    const hue=200+60*Math.sin(t*0.05);
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    for(const nb of neb){ nb.x+=nb.vx; nb.y+=nb.vy;
+      if(nb.x<0)nb.x+=W; if(nb.x>W)nb.x-=W; if(nb.y<0)nb.y+=H; if(nb.y>H)nb.y-=H;
+      const g=ctx.createRadialGradient(nb.x,nb.y,0,nb.x,nb.y,Math.max(W,H)*0.42);
+      g.addColorStop(0,'rgba('+nb.c+',0.06)'); g.addColorStop(1,'rgba('+nb.c+',0)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H); }
+    ctx.globalCompositeOperation='source-over';
+    for(const p of P){
+      p.x+=p.vx*0.4; p.y+=p.vy*0.4;
+      if(p.x<0)p.x+=W; if(p.x>W)p.x-=W; if(p.y<0)p.y+=H; if(p.y>H)p.y-=H;
+      if(mx>-900){ const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
+        if(d2<R2){ const d=Math.sqrt(d2)||1,f=(1-d/R)*1.6; p.x+=dx/d*f; p.y+=dy/d*f; } }
+    }
+    for(let i=0;i<P.length;i++){ const a=P[i];
+      for(let j=i+1;j<P.length;j++){ const b=P[j],dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
+        if(d2<LINK2){ const al=(1-d2/LINK2)*0.42;
+          ctx.strokeStyle='hsla('+hue+',80%,68%,'+al.toFixed(3)+')';
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); } }
+      if(mx>-900){ const dx=a.x-mx,dy=a.y-my,d2=dx*dx+dy*dy;
+        if(d2<R2){ const al=(1-Math.sqrt(d2)/R)*0.42;
+          ctx.strokeStyle='hsla('+hue+',85%,78%,'+al.toFixed(3)+')';
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(mx,my); ctx.stroke(); } } }
+    for(const p of P){ const tw=0.6+0.4*Math.sin(t*2+p.tw);
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='hsla('+hue+',58%,80%,'+(0.35+0.4*tw).toFixed(3)+')'; ctx.fill(); }
+    shootT-=0.016;
+    if(shootT<=0){ shootT=rand(3.5,8);
+      const edge=Math.random()<0.5;
+      shoot.push({x:edge?rand(0,W):-40,y:edge?-40:rand(0,H*0.5),vx:rand(6,11),vy:rand(3,7),life:1}); }
+    for(let i=shoot.length-1;i>=0;i--){ const sp=shoot[i]; sp.x+=sp.vx; sp.y+=sp.vy; sp.life-=0.012;
+      if(sp.life<=0||sp.x>W+50||sp.y>H+50){ shoot.splice(i,1); continue; }
+      const g=ctx.createLinearGradient(sp.x,sp.y,sp.x-sp.vx*7,sp.y-sp.vy*7);
+      g.addColorStop(0,'rgba(220,240,255,'+sp.life.toFixed(2)+')');
+      g.addColorStop(1,'rgba(220,240,255,0)');
+      ctx.strokeStyle=g; ctx.lineWidth=2; ctx.beginPath();
+      ctx.moveTo(sp.x,sp.y); ctx.lineTo(sp.x-sp.vx*7,sp.y-sp.vy*7); ctx.stroke(); }
+    requestAnimationFrame(frame);
+  }
+  window.__starsResume=function(){ requestAnimationFrame(frame); };
+  window.__starsRun=true; requestAnimationFrame(frame);
+}
+let starsReady=false;
+function toggleStars(on){
+  if(REDUCED) return;
+  if(on){
+    if(!starsReady){ starsReady=true; window.__starsRun=true; try{ initStars(); }catch(e){} return; }
+    if(!window.__starsRun){ window.__starsRun=true; if(window.__starsResume) window.__starsResume(); }
+  } else { window.__starsRun=false; }
+}
+
+let oceanReady=false;
+function toggleOcean(on){
+  if(REDUCED||window.__oceanFailed) return;
+  if(on){
+    if(!oceanReady){ oceanReady=true; try{ initOcean(); }catch(e){ window.__oceanFailed=true; } return; }
+    if(!window.__oceanRun){ window.__oceanRun=true; if(window.__oceanResume) window.__oceanResume(); }
+  } else { window.__oceanRun=false; }
 }
 function goTo(i){ if(i<0||i>=total) return; current=i; render(); }
 const next=()=>goTo(Math.min(current+1,total-1));
