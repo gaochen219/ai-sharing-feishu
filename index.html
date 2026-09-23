@@ -57,9 +57,6 @@
     transition:opacity .5s ease,transform .5s ease,visibility .5s}
   .slide.active{opacity:1;visibility:visible;transform:none}
   .slide.prev{transform:translateY(-24px)}
-  .brackets .br-bl,.brackets .br-br{position:absolute;width:52px;height:52px;border:1px solid rgba(0,240,255,.3)}
-  .br-bl{left:3vw;bottom:5vh;border-right:0;border-top:0}
-  .br-br{right:3vw;bottom:5vh;border-left:0;border-top:0}
 
   /* reveal */
   .reveal{opacity:0;transform:translateY(16px)}
@@ -483,6 +480,9 @@
   .q5 .qq:nth-child(4) .qt5 em{color:var(--gold);text-shadow:0 0 22px rgba(255,200,87,.35)}
   .q5 .qq:nth-child(5) .qt5 em{color:var(--magenta);text-shadow:0 0 22px rgba(255,43,214,.4)}
 
+  .vcap{margin-top:8px;font:500 10.5px/1.5 "JetBrains Mono",monospace;
+    color:var(--ink-3);letter-spacing:.06em;text-align:center}
+
   @media (max-width:1100px){
     .pi-bar{grid-template-columns:repeat(5,1fr)}
     .stats.c4,.stats.c3{grid-template-columns:repeat(2,1fr)}
@@ -504,10 +504,9 @@
 <div class="deck" id="deck">
 
   <!-- ============ 1 · Cover · Water Ripple ============ -->
-  <section class="slide cover ocean brackets">
+  <section class="slide cover ocean">
     <canvas id="oceanGl"></canvas>
     <div class="ocean-veil"></div>
-    <span class="br-bl"></span><span class="br-br"></span>
     <div class="ocean-inner">
       <div class="logo-mark reveal reveal-1">CG</div>
       <div class="topic-en reveal reveal-2">A &nbsp;C L I E N T ' S &nbsp; V I E W</div>
@@ -515,7 +514,6 @@
         <span class="share-word">SHARING</span><br/>
         <span class="share-sub">WORKSHOP</span>
       </h1>
-      <div class="cover-q reveal reveal-4">AI 落地的核心，是让 AI <em>更聪明</em>吗？</div>
       <div class="h-line reveal reveal-5">
         <span class="bar"></span><span>SHARING&nbsp;·&nbsp;NOT&nbsp;SELLING</span><span class="bar"></span>
       </div>
@@ -614,14 +612,6 @@
         <div class="ph"><img src="assets/talk-amcham.jpg" alt="上海美国商会 WEFORSHE 论坛 AI at Work"></div>
         <div class="ph"><img src="assets/talk-robospace.jpg" alt="Robo Space AI 如何重构智慧场景"></div>
       </div>
-      <div class="chips reveal reveal-5" style="margin-top:16px">
-        <div class="chip">腾讯 AI 会议 · <b>企业 AI 落地</b></div>
-        <div class="chip mg2">AWS · <b>参展分享</b></div>
-        <div class="chip lm2">集团全员会 · <b>AI Design Token</b></div>
-        <div class="chip">内部 · <b>碳基生物 AI 学习小组</b></div>
-        <div class="chip mg2">DT All Hands</div>
-        <div class="chip lm2">Kellogg / Guanghua EMBA</div>
-      </div>
     </div>
     <div class="note reveal reveal-6">// 今天全程 <b>可以随时打断</b> — 每一页都是一个问题，不是一个结论。</div>
   </section>
@@ -692,8 +682,8 @@
   <section class="slide">
     <div class="head" style="display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end">
       <div>
-        <div class="eyebrow reveal reveal-1">03 · 我们有哪些有趣的 IDEA</div>
-        <h2 class="q reveal reveal-2">一个 AI 团队的<br/>「<i>下班时间</i>」在干嘛？</h2>
+        <div class="eyebrow reveal reveal-1">03 · IDEAS</div>
+        <h2 class="q reveal reveal-2">我们有哪些<i>有趣的 idea</i>？</h2>
       </div>
       <div class="reveal reveal-3" style="display:flex;gap:26px;padding-bottom:6px">
         <div style="text-align:right">
@@ -705,22 +695,28 @@
       </div>
     </div>
     <div class="body">
-      <div class="reveal reveal-4" style="margin-top:16px;display:grid;grid-template-columns:.86fr 1.14fr;gap:16px;align-items:start">
-        <div>
-          <div class="vid">
-            <video src="assets/neo4j-graph.mp4" poster="assets/neo4j-poster.jpg"
-                   autoplay muted loop playsinline preload="metadata"></video>
-            <div class="cap">Neo4j 图谱 · 193 节点 / 396 关系</div>
+      <div class="reveal reveal-4" style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+
+        <!-- 左：两张视觉并排，各自完整显示 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <div class="vid"><video src="assets/neo4j-graph.mp4" poster="assets/neo4j-poster.jpg"
+                   autoplay muted loop playsinline preload="metadata"></video></div>
+            <div class="vcap">Neo4j 图谱 · 193 节点 / 396 关系</div>
           </div>
-          <div class="ph" style="margin-top:12px;aspect-ratio:4/3">
-            <img src="assets/eink-dashboard.jpg" alt="Claude 用量看板 · 墨水屏">
+          <div>
+            <div class="vid"><img src="assets/eink-dashboard.jpg" alt="Claude 用量看板 · 墨水屏"
+                   style="width:100%;display:block"></div>
+            <div class="vcap">AI 硬件 · Claude 用量看板（墨水屏）</div>
           </div>
         </div>
+
+        <!-- 右：小组 + 模块 -->
         <div>
           <div class="linkbar" style="width:100%;justify-content:center">
             <span class="ico">◆</span>碳基生物 AI 学习小组
           </div>
-          <div class="chips" style="margin-top:14px">
+          <div class="chips" style="margin-top:12px">
             <div class="chip lm2">Neo4j · <b>Graph Engineering</b></div>
             <div class="chip">AI 硬件 · <b>墨水屏用量看板</b></div>
             <div class="chip mg2"><b>Agent Platform</b></div>
@@ -728,27 +724,29 @@
             <div class="chip lm2"><b>AI 网关</b></div>
             <div class="chip mg2"><b>AI 护栏</b></div>
             <div class="chip"><b>AI Design System</b></div>
-            <div class="chip lm2"><b>SkillsHub</b> · 自托管技能中心</div>
+            <div class="chip lm2"><b>SkillsHub</b></div>
             <div class="chip mg2"><b>曲名星</b> · 8 种策略起名</div>
             <div class="chip">WebGL · <b>流体噪声背景</b></div>
             <div class="chip lm2"><b>10 倍速学习</b></div>
           </div>
-          <div class="card gold" style="margin-top:14px">
-            <div class="ct"><span class="idx">A</span>有个优先级标签叫「不值得分享」</div>
-            <div class="cd">83 个课题里有 1 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
-          </div>
-          <div class="card cy" style="margin-top:10px">
-            <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天</div>
-            <div class="cd">10:00 开会沟通需求 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
-          </div>
+        </div>
+      </div>
+
+      <div class="cards c2 reveal reveal-5" style="margin-top:16px">
+        <div class="card gold">
+          <div class="ct"><span class="idx">A</span>有个优先级标签叫「不值得分享」</div>
+          <div class="cd">83 个课题里，有 3 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
+        </div>
+        <div class="card cy">
+          <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天</div>
+          <div class="cd">10:00 开会沟通需求 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ 7 · 我们踩过哪些坑 ============ -->
-  <section class="slide brackets">
-    <span class="br-bl"></span><span class="br-br"></span>
+  <section class="slide">
     <div class="head">
       <div class="eyebrow mg reveal reveal-1">04 · 踩过的坑</div>
       <h2 class="q reveal reveal-2">我们踩过<i>哪些坑</i>？</h2>
@@ -941,9 +939,8 @@
   </section>
 
   <!-- ============ 11 · My questions for you ============ -->
-  <section class="slide stars brackets">
+  <section class="slide stars">
     <canvas id="starsCv"></canvas>
-    <span class="br-bl"></span><span class="br-br"></span>
     <div class="stars-inner">
       <div class="head">
         <div class="eyebrow reveal reveal-1" style="letter-spacing:.34em">07 · OVER TO YOU</div>
