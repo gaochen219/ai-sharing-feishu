@@ -205,6 +205,14 @@
   .shot img{width:100%;display:block}
   .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:9px 12px;font:500 10.5px/1.5 "JetBrains Mono",monospace;
     color:var(--ink-1);background:linear-gradient(0deg,rgba(3,5,13,.92),transparent);letter-spacing:.06em}
+  .vid{position:relative;border:1px solid var(--card-line);border-radius:5px;overflow:hidden;background:#000}
+  .vid video{width:100%;display:block}
+  .vid::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 46px rgba(194,255,61,.16)}
+  .vid .cap{position:absolute;left:0;right:0;bottom:0;padding:9px 12px;font:500 10.5px/1.5 "JetBrains Mono",monospace;
+    color:var(--ink-1);background:linear-gradient(0deg,rgba(3,5,13,.92),transparent);letter-spacing:.06em}
+  .time-cover{border:1px solid var(--card-line);border-radius:5px;overflow:hidden;background:#000;position:relative}
+  .time-cover img{width:100%;display:block}
+  .time-cover::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 40px rgba(255,43,214,.18)}
 
   /* ===== news row (P9) ===== */
   .news{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -410,7 +418,7 @@
           <div class="col-h cy">沙箱三代演进 · 每一次都是被真实约束推着走</div>
           <table class="shift">
             <tr><td class="from">本地 Docker<small>跑得通，但只能跑在单机上</small></td><td class="arrow">→</td><td class="to">大赛原型</td></tr>
-            <tr><td class="from">火山云 ECI + NAS<small>身份可伪造，验证过能读到别人的数据</small></td><td class="arrow">→</td><td class="to">迁云</td></tr>
+            <tr><td class="from">火山云 ECI + NAS<small>按系统账号识别身份，隔离强度不足</small></td><td class="arrow">→</td><td class="to">迁云</td></tr>
             <tr><td class="from">VEFAAS 云沙箱 + TOS<small>签名认证不可伪造，凭证不进沙箱</small></td><td class="arrow">→</td><td class="to">生产形态</td></tr>
           </table>
         </div>
@@ -443,24 +451,32 @@
         <div class="stat m"><div class="n count" data-to="25">0</div><div class="lab">位研究者</div><div class="sub2">自愿认领 · 轮流分享</div></div>
         <div class="stat l"><div class="n count" data-to="44">0</div><div class="lab">篇经验分享</div><div class="sub2">另有 27 工具 · 4 理论</div></div>
       </div>
-      <div class="chips reveal reveal-4" style="margin-top:20px">
-        <div class="chip">AI 硬件 · <b>墨水屏用量看板</b></div>
-        <div class="chip mg2">ESP32-S3 + INMP441 · <b>声音波形可视化</b></div>
-        <div class="chip lm2">Neo4j · <b>Graph Engineering</b></div>
-        <div class="chip">WebGL · <b>流体噪声背景</b>（已用在 AI Portal 上）</div>
-        <div class="chip mg2"><b>曲名星</b> · 8 种策略给项目起名</div>
-        <div class="chip lm2"><b>GLP SkillsHub</b> · 自托管 Skills 注册中心</div>
-        <div class="chip">Remotion · <b>AI 生视频</b></div>
-        <div class="chip mg2"><b>10 倍速学习</b> · 视频字幕抓取 + AI 提炼</div>
-      </div>
-      <div class="cards c2 reveal reveal-5" style="margin-top:18px">
-        <div class="card gold">
-          <div class="ct"><span class="idx">A</span>他们有一个优先级标签叫「不值得分享」</div>
-          <div class="cd">83 个课题里，有 1 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
+      <div class="split wide-l reveal reveal-4" style="margin-top:18px">
+        <div>
+          <div class="vid">
+            <video src="assets/neo4j-graph.mp4" poster="assets/neo4j-poster.jpg"
+                   autoplay muted loop playsinline preload="metadata"></video>
+            <div class="cap">Neo4j 知识图谱 &nbsp;/&nbsp; 193 节点 · 396 关系 · 新能源域</div>
+          </div>
         </div>
-        <div class="card cy">
-          <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天的时间线</div>
-          <div class="cd">10:00 开会沟通需求 → 10:26 建群 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
+        <div>
+          <div class="chips">
+            <div class="chip lm2">Neo4j · <b>Graph Engineering</b></div>
+            <div class="chip">AI 硬件 · <b>墨水屏用量看板</b></div>
+            <div class="chip mg2">ESP32-S3 · <b>声音波形可视化</b></div>
+            <div class="chip">WebGL · <b>流体噪声背景</b></div>
+            <div class="chip mg2"><b>曲名星</b> · 8 种策略起名</div>
+            <div class="chip lm2"><b>SkillsHub</b> · 自托管技能注册中心</div>
+            <div class="chip"><b>10 倍速学习</b></div>
+          </div>
+          <div class="card gold" style="margin-top:14px">
+            <div class="ct"><span class="idx">A</span>有个优先级标签叫「不值得分享」</div>
+            <div class="cd">83 个课题里，有 1 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
+          </div>
+          <div class="card cy" style="margin-top:10px">
+            <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天</div>
+            <div class="cd">10:00 开会沟通需求 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
+          </div>
         </div>
       </div>
     </div>
@@ -540,26 +556,34 @@
       <h2 class="q reveal reveal-2">行业<em>这一周</em><br/>发生了什么？</h2>
     </div>
     <div class="body">
-      <div class="news reveal reveal-3" style="margin-top:20px">
-        <div class="nw hot">
-          <div class="dt">09 · 15 &nbsp;/&nbsp; 一周前</div>
-          <div class="nt">Jev · 一个不肯写字的模型</div>
-          <div class="nd">不生成文字，只下判断。和我们 9 周踩出来的结论，是同一件事。</div>
+      <div class="split reveal reveal-3" style="margin-top:18px;grid-template-columns:1.45fr .55fr">
+        <div class="news">
+          <div class="nw hot">
+            <div class="dt">09 · 15 &nbsp;/&nbsp; 一周前</div>
+            <div class="nt">Jev · 一个不肯写字的模型</div>
+            <div class="nd">不生成文字，只下判断。和我们 9 周踩出来的结论，是同一件事。</div>
+          </div>
+          <div class="nw hot">
+            <div class="dt">09 · 22 &nbsp;/&nbsp; 昨天</div>
+            <div class="nt">云栖大会 ·「智以致用」</div>
+            <div class="nd">吴泳铭：未来机器思考总量将是人类的 <b class="gd">1000 倍</b>，今天不到 3%。</div>
+          </div>
+          <div class="nw">
+            <div class="dt">MIT · 商业 AI 现状</div>
+            <div class="nt">投入超 300 亿美元，<b class="mg">95%</b> 的企业 GenAI 试点没能进生产</div>
+            <div class="nd">归因不是模型质量，而是系统能不能学习和适应 —「静态工具必死」。</div>
+          </div>
+          <div class="nw">
+            <div class="dt">STANFORD · 51 个真实部署</div>
+            <div class="nt"><b class="hl">77%</b> 的最难挑战来自变革管理、数据质量和流程重构</div>
+            <div class="nd">技术，始终是最容易的那部分。</div>
+          </div>
         </div>
-        <div class="nw hot">
-          <div class="dt">09 · 22 &nbsp;/&nbsp; 昨天</div>
-          <div class="nt">云栖大会 ·「智以致用」</div>
-          <div class="nd">吴泳铭：未来机器思考总量将是人类的 <b class="gd">1000 倍</b>，今天不到 3%。AI Coding 仍停留在 1882 年的电灯时代。</div>
-        </div>
-        <div class="nw">
-          <div class="dt">MIT · 商业 AI 现状</div>
-          <div class="nt">投入超 300 亿美元，<b class="mg">95%</b> 的企业 GenAI 试点没能进生产</div>
-          <div class="nd">归因不是模型质量，而是系统能不能学习和适应 —「静态工具必死」。</div>
-        </div>
-        <div class="nw">
-          <div class="dt">STANFORD · 51 个真实部署</div>
-          <div class="nt"><b class="hl">77%</b> 的最难挑战来自变革管理、数据质量和流程重构</div>
-          <div class="nd">技术，始终是最容易的那部分。</div>
+        <div>
+          <div class="time-cover"><img src="assets/time-tipping-point.jpg" alt="TIME · THE AI TIPPING POINT"></div>
+          <div style="margin-top:9px;font:500 10px/1.6 'JetBrains Mono',monospace;color:var(--ink-3);letter-spacing:.1em">
+            TIME · 2026.09.15<br/>“HOW DANGEROUS ARE YOU?”
+          </div>
         </div>
       </div>
       <div class="quote reveal reveal-4">
