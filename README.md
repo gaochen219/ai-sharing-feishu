@@ -7,23 +7,30 @@
 
 ## 怎么播放
 
-**GitHub 网页上无法播放** — 它只显示源码不渲染。必须下载到本地。
+### 🔗 直接打开（最快）
 
-### 方式一：单文件（推荐上台用）
+## https://gaochen219.github.io/ai-sharing-feishu/
 
-下载 **`deck-standalone.html`** 一个文件即可，图片已内嵌，换电脑/U 盘/微信传都不会丢图。
+点开即播，不用下载。
 
-浏览器打开 → 按 `F` 全屏。
+### 💾 本地文件（上台建议用这个）
 
-### 方式二：整个仓库
+会场网络不一定可靠，正式演讲前把 **`deck-standalone.html`** 下到本地：
+
+```
+https://github.com/gaochen219/ai-sharing-feishu/raw/main/deck-standalone.html
+```
+
+单个文件 6.4 MB，所有图片和视频已内嵌，换电脑 / U 盘 / 微信传都不会丢资源。浏览器打开后按 `F` 全屏。
+
+### 📦 整个仓库
 
 ```bash
 git clone https://github.com/gaochen219/ai-sharing-feishu.git
 cd ai-sharing-feishu && open index.html   # Windows: start index.html
 ```
 
-或直接下载 ZIP：`https://github.com/gaochen219/ai-sharing-feishu/archive/refs/heads/main.zip`
-（必须解压整个文件夹，`index.html` 依赖 `assets/`）
+`index.html` 依赖 `assets/`，必须保留整个目录。
 
 ---
 
@@ -70,10 +77,21 @@ cd ai-sharing-feishu && open index.html   # Windows: start index.html
 
 ---
 
-## 待办
+## 素材来源
 
-- [ ] **P3 照片位待补** — 替换 `index.html` 中 P3 的 `.ph` 占位块，然后重新生成单文件版
+页面里的数字全部来自内部一手记录，不是估算：
+
+| 页面 | 来源 |
+|---|---|
+| P4 全景 | 重点项目人员排期表（113 条记录 / 74 个 AI 项目）、GLP AI Portal |
+| P5 AI-Buddy 3.0 | AI-Buddy 3.0 上线复盘报告 |
+| P6 有趣的 idea | 碳基生物 AI 学习小组课题表（83 课题 / 25 位研究者） |
+| P7 · P8 坑与主线 | AI 问数项目复盘（23 页） |
+| P9 外部信息 | Jev / 云栖大会 / MIT / 斯坦福 / TIME，均为 2026.09 公开报道 |
+
+> ⚠️ 涉及内审金额、生产系统越权实测细节、云迁移成本测算与项目预算的部分已做脱敏，
+> 改为现场口述。见 `SPEAKER-NOTES.md` 中标注「*口述，不留文字*」的条目。
 
 ---
 
-⚠️ 仓库含内部数据，保持 **private**，不要开 GitHub Pages。
+⚠️ 仓库为 public。标注「口述，不留文字」的内容只在现场讲，不要写进任何文件。
