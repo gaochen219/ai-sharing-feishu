@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI 落地的核心，是让 AI 更聪明吗？ · Chen Gao · 高晨</title>
+<meta name="description" content="一个客户的视角 — GLP 的 AI 落地经验与踩过的坑。Chen Gao · 高晨 / GLP VP · Big Data & AI" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0:#03050d; --bg-1:#060a18; --bg-2:#0b1226;
+    --ink-0:#f1f9ff; --ink-1:#dde7f7; --ink-2:#b3c1da; --ink-3:#8f9fbd;
+    --cyan:#00f0ff; --cyan-soft:#6cf3ff;
+    --magenta:#ff2bd6; --magenta-soft:#ffa1ec;
+    --lime:#c2ff3d; --gold:#ffc857; --red:#ff5470;
+    --grid:rgba(0,240,255,.06); --grid-strong:rgba(0,240,255,.14);
+    --card:rgba(255,255,255,.028); --card-line:rgba(255,255,255,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg-0);color:var(--ink-0);
+    font-family:"Inter","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow:hidden;user-select:none}
+
+  /* ===== background ===== */
+  .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:56px 56px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
+  .bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(circle at 18% 22%,rgba(0,240,255,.16) 0%,transparent 38%),
+               radial-gradient(circle at 82% 78%,rgba(255,43,214,.13) 0%,transparent 42%),
+               radial-gradient(ellipse at 50% 100%,rgba(0,240,255,.07) 0%,transparent 55%)}
+  .bg-scan{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 3px);
+    mix-blend-mode:overlay}
+  canvas#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5}
+
+  /* ===== HUD ===== */
+  .hud{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;
+    padding:18px 30px;font:500 10px/1 "JetBrains Mono",monospace;letter-spacing:.22em;color:var(--ink-3);pointer-events:none}
+  .hud .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--cyan);
+    margin-right:8px;vertical-align:1px;box-shadow:0 0 8px var(--cyan);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .ticks{position:fixed;bottom:22px;left:30px;z-index:20;display:flex;gap:5px}
+  .tk{width:22px;height:2px;background:rgba(255,255,255,.14);cursor:pointer;transition:.3s}
+  .tk.done{background:rgba(0,240,255,.4)}
+  .tk.active{background:var(--cyan);box-shadow:0 0 10px var(--cyan);width:34px}
+  .hint{position:fixed;bottom:18px;right:30px;z-index:20;
+    font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.18em;color:var(--ink-3)}
+  .hint b{color:var(--cyan)}
+
+  /* ===== slide system ===== */
+  .deck{position:relative;width:100vw;height:100vh;z-index:2}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:9vh 7vw 11vh;opacity:0;visibility:hidden;transform:translateY(24px);
+    transition:opacity .5s ease,transform .5s ease,visibility .5s}
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  .slide.prev{transform:translateY(-24px)}
+  .brackets .br-bl,.brackets .br-br{position:absolute;width:52px;height:52px;border:1px solid rgba(0,240,255,.3)}
+  .br-bl{left:3vw;bottom:5vh;border-right:0;border-top:0}
+  .br-br{right:3vw;bottom:5vh;border-left:0;border-top:0}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px)}
+  .slide.active .reveal{animation:rise .62s cubic-bezier(.2,.7,.3,1) forwards}
+  .slide.active .reveal-1{animation-delay:.06s}
+  .slide.active .reveal-2{animation-delay:.15s}
+  .slide.active .reveal-3{animation-delay:.26s}
+  .slide.active .reveal-4{animation-delay:.37s}
+  .slide.active .reveal-5{animation-delay:.48s}
+  .slide.active .reveal-6{animation-delay:.60s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ===== shared type ===== */
+  .eyebrow{font:600 10px/1 "JetBrains Mono",monospace;letter-spacing:.34em;color:var(--cyan);text-transform:uppercase}
+  .eyebrow.mg{color:var(--magenta)}
+  .q{font-size:clamp(28px,4.0vw,56px);font-weight:800;line-height:1.24;letter-spacing:-.01em;margin-top:14px}
+  .q em{font-style:normal;color:var(--cyan);text-shadow:0 0 28px rgba(0,240,255,.4)}
+  .q i{font-style:normal;color:var(--magenta);text-shadow:0 0 28px rgba(255,43,214,.4)}
+  .sub{margin-top:14px;font-size:clamp(13px,1.25vw,17px);color:var(--ink-2);line-height:1.75;font-weight:300;max-width:60ch}
+  .sub b{color:var(--ink-0);font-weight:600}
+  .hl{color:var(--cyan);font-weight:600}
+  .mg{color:var(--magenta);font-weight:600}
+  .lm{color:var(--lime);font-weight:600}
+  .gd{color:var(--gold);font-weight:600}
+  .head{flex:0 0 auto}
+  .body{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;min-height:0}
+  .note{margin-top:auto;padding-top:16px;font:400 12px/1.7 "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:.02em}
+  .note b{color:var(--gold);font-weight:600}
+
+  /* ===== cover ===== */
+  .cover{align-items:flex-start;justify-content:center}
+  .logo-mark{width:54px;height:54px;border:1px solid var(--cyan);display:grid;place-items:center;
+    font:700 17px/1 "JetBrains Mono",monospace;color:var(--cyan);box-shadow:0 0 26px rgba(0,240,255,.22)}
+  .topic-en{margin-top:26px;font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.44em;color:var(--ink-3)}
+  .mega{margin-top:20px;font-size:clamp(34px,5.3vw,78px);font-weight:900;line-height:1.14;letter-spacing:-.022em}
+  .mega em{font-style:normal;color:var(--cyan);text-shadow:0 0 40px rgba(0,240,255,.45)}
+  .h-line{margin-top:28px;display:flex;align-items:center;gap:14px;
+    font:600 10px/1 "JetBrains Mono",monospace;letter-spacing:.3em;color:var(--ink-3)}
+  .h-line .bar{height:1px;width:64px;background:linear-gradient(90deg,var(--cyan),transparent)}
+  .meta-row{margin-top:40px;display:flex;gap:56px;flex-wrap:wrap}
+  .meta-row .k{font:600 9px/1 "JetBrains Mono",monospace;letter-spacing:.26em;color:var(--ink-3)}
+  .meta-row .v{margin-top:9px;font-size:15px;font-weight:600;color:var(--ink-0)}
+
+  /* ===== π profile ===== */
+  .pi-head{display:flex;justify-content:space-between;align-items:flex-start;gap:36px;flex-wrap:wrap}
+  .pi-name{font-size:clamp(28px,3.2vw,44px);font-weight:900;letter-spacing:.02em;line-height:1.1}
+  .pi-en{font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.34em;color:var(--ink-3);margin-top:7px}
+  .title-now{margin-top:15px;font-size:13px;line-height:1.95;color:var(--ink-1);font-weight:500}
+  .title-now .past{color:var(--ink-3);font-weight:400}
+  .pi-glyph-block{text-align:right;min-width:210px}
+  .pi-glyph{font-size:clamp(46px,5.6vw,82px);font-weight:200;color:var(--cyan);line-height:1;
+    text-shadow:0 0 42px rgba(0,240,255,.5);font-family:"JetBrains Mono",monospace}
+  .pi-tagline{margin-top:6px;font:600 9px/1 "JetBrains Mono",monospace;letter-spacing:.26em;color:var(--ink-3)}
+  .pi-bio{margin-top:12px;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+  .pi-bar{margin-top:26px;display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+  .pi-ind{border:1px solid var(--card-line);background:var(--card);padding:11px 7px;text-align:center;border-radius:3px}
+  .pi-ind.glp{border-color:rgba(0,240,255,.34);background:rgba(0,240,255,.05)}
+  .pi-ind .ind-name{font-size:12px;font-weight:700;color:var(--ink-0)}
+  .pi-ind .ind-co{margin-top:4px;font:400 8.5px/1.3 "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:.04em}
+  .pi-legs{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pi-leg{border-top:2px solid var(--cyan);padding-top:12px}
+  .pi-leg.right{border-top-color:var(--magenta)}
+  .leg-head{display:flex;align-items:baseline;gap:11px}
+  .leg-head .v{font:700 14px/1 "JetBrains Mono",monospace;color:var(--cyan);letter-spacing:.1em}
+  .pi-leg.right .leg-head .v{color:var(--magenta)}
+  .leg-head .en{font-size:12px;color:var(--ink-2)}
+  .skills{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px;list-style:none}
+  .skills li{font-size:11px;color:var(--ink-2);border:1px solid var(--card-line);
+    background:var(--card);padding:5px 9px;border-radius:2px}
+  .pi-mark{margin-top:16px;text-align:center;font-size:12.5px;color:var(--ink-2);letter-spacing:.02em}
+
+  /* ===== stat strip ===== */
+  .stats{display:grid;gap:14px;margin-top:8px}
+  .stats.c3{grid-template-columns:repeat(3,1fr)}
+  .stats.c4{grid-template-columns:repeat(4,1fr)}
+  .stat{border:1px solid var(--card-line);background:var(--card);border-radius:4px;padding:20px 18px;position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,var(--cyan),transparent)}
+  .stat.m::before{background:linear-gradient(90deg,var(--magenta),transparent)}
+  .stat.l::before{background:linear-gradient(90deg,var(--lime),transparent)}
+  .stat.g::before{background:linear-gradient(90deg,var(--gold),transparent)}
+  .stat .n{font-size:clamp(26px,3.3vw,46px);font-weight:900;line-height:1;color:var(--cyan);
+    font-family:"JetBrains Mono",monospace;letter-spacing:-.02em}
+  .stat.m .n{color:var(--magenta)} .stat.l .n{color:var(--lime)} .stat.g .n{color:var(--gold)}
+  .stat .n small{font-size:.44em;font-weight:700;margin-left:3px;letter-spacing:0}
+  .stat .lab{margin-top:10px;font-size:12px;color:var(--ink-1);font-weight:600}
+  .stat .sub2{margin-top:4px;font:400 10px/1.5 "JetBrains Mono",monospace;color:var(--ink-3)}
+
+  /* ===== generic cards ===== */
+  .cards{display:grid;gap:12px}
+  .cards.c2{grid-template-columns:1fr 1fr}
+  .cards.c3{grid-template-columns:repeat(3,1fr)}
+  .card{border:1px solid var(--card-line);background:var(--card);border-radius:4px;padding:16px 17px}
+  .card .ct{font-size:14px;font-weight:700;color:var(--ink-0);display:flex;align-items:center;gap:9px}
+  .card .ct .idx{font:700 10px/1 "JetBrains Mono",monospace;color:var(--cyan);
+    border:1px solid rgba(0,240,255,.4);padding:4px 6px;border-radius:2px;flex:0 0 auto}
+  .card .cd{margin-top:9px;font-size:12px;line-height:1.75;color:var(--ink-2)}
+  .card.pink{border-color:rgba(255,43,214,.3);background:rgba(255,43,214,.05)}
+  .card.pink .ct .idx{color:var(--magenta);border-color:rgba(255,43,214,.45)}
+  .card.cy{border-color:rgba(0,240,255,.3);background:rgba(0,240,255,.05)}
+  .card.gold{border-color:rgba(255,200,87,.3);background:rgba(255,200,87,.05)}
+  .card.gold .ct .idx{color:var(--gold);border-color:rgba(255,200,87,.45)}
+
+  /* ===== quote banner ===== */
+  .quote{margin-top:16px;border-left:2px solid var(--gold);padding:13px 18px;background:rgba(255,200,87,.06);border-radius:0 4px 4px 0}
+  .quote .qt{font-size:14px;line-height:1.7;color:var(--ink-0);font-weight:600}
+  .quote .qs{margin-top:8px;font:400 10px/1 "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:.1em}
+  .quote.cy{border-left-color:var(--cyan);background:rgba(0,240,255,.06)}
+  .quote.mg{border-left-color:var(--magenta);background:rgba(255,43,214,.06)}
+
+  /* ===== photo wall (P3) ===== */
+  .photo-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+  .ph{aspect-ratio:4/3;border:1px dashed rgba(0,240,255,.3);background:rgba(0,240,255,.03);
+    border-radius:4px;display:grid;place-items:center;position:relative;overflow:hidden}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph .phl{font:500 10px/1.6 "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:.14em;text-align:center;padding:8px}
+  .ph .tag{position:absolute;left:0;bottom:0;right:0;padding:7px 9px;font-size:11px;font-weight:600;
+    color:var(--ink-0);background:linear-gradient(0deg,rgba(3,5,13,.92),transparent)}
+
+  /* ===== two column split ===== */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  .split.wide-l{grid-template-columns:1.25fr 1fr}
+  .col-h{font:600 10px/1 "JetBrains Mono",monospace;letter-spacing:.24em;color:var(--ink-3);
+    padding-bottom:9px;border-bottom:1px solid var(--card-line);margin-bottom:12px}
+  .col-h.cy{color:var(--cyan);border-bottom-color:rgba(0,240,255,.3)}
+  .col-h.mg{color:var(--magenta);border-bottom-color:rgba(255,43,214,.3)}
+
+  /* ===== shift table (P8) ===== */
+  .shift{width:100%;border-collapse:collapse;font-size:12.5px}
+  .shift td{padding:11px 10px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
+  .shift .from{color:var(--red);font-weight:600;width:44%}
+  .shift .from small{display:block;color:var(--ink-3);font-weight:400;font-size:10.5px;margin-top:3px;line-height:1.5}
+  .shift .arrow{width:34px;text-align:center;color:var(--ink-3);font-family:"JetBrains Mono",monospace}
+  .shift .to{color:var(--lime);font-weight:600}
+
+  /* ===== product shots ===== */
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .shot{border:1px solid var(--card-line);border-radius:5px;overflow:hidden;background:#000;position:relative}
+  .shot::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 46px rgba(0,240,255,.14);pointer-events:none}
+  .shot img{width:100%;display:block}
+  .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:9px 12px;font:500 10.5px/1.5 "JetBrains Mono",monospace;
+    color:var(--ink-1);background:linear-gradient(0deg,rgba(3,5,13,.92),transparent);letter-spacing:.06em}
+
+  /* ===== news row (P9) ===== */
+  .news{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .nw{border:1px solid var(--card-line);background:var(--card);border-radius:4px;padding:15px 16px;position:relative}
+  .nw .dt{font:600 9.5px/1 "JetBrains Mono",monospace;letter-spacing:.18em;color:var(--magenta)}
+  .nw .nt{margin-top:9px;font-size:14px;font-weight:700;color:var(--ink-0);line-height:1.5}
+  .nw .nd{margin-top:8px;font-size:11.5px;line-height:1.7;color:var(--ink-2)}
+  .nw.hot{border-color:rgba(255,43,214,.4);background:rgba(255,43,214,.06)}
+
+  /* ===== discussion (P10) ===== */
+  .disc{display:grid;gap:14px;margin-top:6px}
+  .dq{border:1px solid var(--card-line);background:var(--card);border-radius:4px;
+    padding:20px 22px;display:flex;gap:18px;align-items:flex-start}
+  .dq .num{font:900 26px/1 "JetBrains Mono",monospace;color:var(--cyan);opacity:.55;flex:0 0 auto}
+  .dq:nth-child(2) .num{color:var(--magenta)}
+  .dq:nth-child(3) .num{color:var(--lime)}
+  .dq .dt2{font-size:clamp(15px,1.7vw,21px);font-weight:700;color:var(--ink-0);line-height:1.5}
+  .dq .dd{margin-top:8px;font-size:12px;color:var(--ink-3);line-height:1.7}
+
+  /* ===== thesis (P8 hero) ===== */
+  .thesis{text-align:center;padding:26px 0}
+  .thesis .big{font-size:clamp(22px,3.0vw,40px);font-weight:900;line-height:1.4;letter-spacing:-.01em}
+  .thesis .big em{font-style:normal;color:var(--cyan);text-shadow:0 0 34px rgba(0,240,255,.45)}
+  .thesis .big i{font-style:normal;color:var(--magenta);text-shadow:0 0 34px rgba(255,43,214,.45)}
+
+  /* ===== idea chips (P6) ===== */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .chip{border:1px solid var(--card-line);background:var(--card);border-radius:3px;padding:9px 13px;font-size:12px;color:var(--ink-1)}
+  .chip b{color:var(--cyan);font-weight:700}
+  .chip.mg2{border-color:rgba(255,43,214,.3)} .chip.mg2 b{color:var(--magenta)}
+  .chip.lm2{border-color:rgba(194,255,61,.3)} .chip.lm2 b{color:var(--lime)}
+
+  @media (max-width:1100px){
+    .pi-bar{grid-template-columns:repeat(5,1fr)}
+    .stats.c4,.stats.c3{grid-template-columns:repeat(2,1fr)}
+    .split,.cards.c2,.cards.c3,.shots,.news{grid-template-columns:1fr}
+    .photo-wall{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div><div class="bg-glow"></div><div class="bg-scan"></div>
+<canvas id="particles"></canvas>
+
+<div class="hud">
+  <div><span class="dot"></span>GLP · DT &nbsp;//&nbsp; GUEST SHARING</div>
+  <div id="clock">--:--:--</div>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- ============ 1 · Cover ============ -->
+  <section class="slide cover brackets">
+    <span class="br-bl"></span><span class="br-br"></span>
+    <div class="logo-mark reveal reveal-1">CG</div>
+    <div class="topic-en reveal reveal-2">A &nbsp;C L I E N T ' S &nbsp; V I E W</div>
+    <h1 class="mega reveal reveal-3">
+      AI 落地的核心<br/>是让 AI <em>更聪明</em>吗？
+    </h1>
+    <div class="h-line reveal reveal-4">
+      <span class="bar"></span><span>SHARING&nbsp;·&nbsp;NOT&nbsp;SELLING</span><span class="bar"></span>
+    </div>
+    <div class="meta-row reveal reveal-5">
+      <div><div class="k">SPEAKER</div><div class="v">Chen Gao · 高 晨</div></div>
+      <div><div class="k">ROLE</div><div class="v">VP · Big Data &amp; AI · GLP</div></div>
+      <div><div class="k">VENUE</div><div class="v">飞书 AI Solution · Workshop</div></div>
+      <div><div class="k">DATE</div><div class="v">2026.09.23</div></div>
+    </div>
+  </section>
+
+  <!-- ============ 2 · π Profile ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">01 · 我是谁</div>
+      <h2 class="q reveal reveal-2">如果我是<em>你的客户</em>，<br/>你会怎么向我提案？</h2>
+    </div>
+    <div class="body">
+      <div class="pi-head" style="margin-top:22px">
+        <div>
+          <div class="pi-name reveal reveal-2">高 晨</div>
+          <div class="pi-en reveal reveal-2">CHEN&nbsp;GAO</div>
+          <div class="title-now reveal reveal-3">
+            ▸ VP · Big Data &amp; AI · GLP（普洛斯）<br/>
+            <span class="past">▸ ex-CDO · Decathlon China · 迪卡侬<br/>
+            ▸ ex-Alibaba · 盒马 / 夸克 / 阿里云 / 天猫<br/>
+            ▸ ex-J&amp;J Ethicon · ex-Novartis · ex-Univ. of Washington</span>
+          </div>
+        </div>
+        <div class="pi-glyph-block reveal reveal-2">
+          <span class="pi-glyph">π</span>
+          <div class="pi-tagline">π-SHAPED EXPERT</div>
+          <div class="pi-bio">跨 <b class="hl">10 大行业</b>，在 <b class="hl">大数据</b> 与 <b class="mg">AI</b><br/>两条专业线上近 20 年深耕。</div>
+        </div>
+      </div>
+      <div class="pi-bar reveal reveal-4">
+        <div class="pi-ind glp"><div class="ind-name">物流地产</div><div class="ind-co">REAL ESTATE</div></div>
+        <div class="pi-ind glp"><div class="ind-name">新能源</div><div class="ind-co">NEW ENERGY</div></div>
+        <div class="pi-ind glp"><div class="ind-name">IDC</div><div class="ind-co">DATA CENTER</div></div>
+        <div class="pi-ind glp"><div class="ind-name">金融</div><div class="ind-co">FINANCE</div></div>
+        <div class="pi-ind"><div class="ind-name">零售</div><div class="ind-co">Decathlon</div></div>
+        <div class="pi-ind"><div class="ind-name">电商</div><div class="ind-co">盒马 · 天猫</div></div>
+        <div class="pi-ind"><div class="ind-name">互联网</div><div class="ind-co">夸克 · UC</div></div>
+        <div class="pi-ind"><div class="ind-name">云计算</div><div class="ind-co">阿里云</div></div>
+        <div class="pi-ind"><div class="ind-name">医疗</div><div class="ind-co">J&amp;J · Novartis</div></div>
+        <div class="pi-ind"><div class="ind-name">教育</div><div class="ind-co">U. Washington</div></div>
+      </div>
+      <div class="pi-legs reveal reveal-5">
+        <div class="pi-leg">
+          <div class="leg-head"><span class="v">BIG DATA</span><span class="en">大数据</span></div>
+          <ul class="skills">
+            <li>数据基座 / 中台</li><li>多维建模</li><li>BI &amp; Analytics</li>
+            <li>归因 · 预测</li><li>数据治理 · 合规</li>
+          </ul>
+        </div>
+        <div class="pi-leg right">
+          <div class="leg-head"><span class="v">AI</span><span class="en">人工智能</span></div>
+          <ul class="skills">
+            <li>AI 中台 · 路线图</li><li>RAG · Agent · Skill</li><li>ML / DL</li>
+            <li>选址 · 定价 · 排班</li><li>AI 合规治理</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pi-mark reveal reveal-6">一横 = <span class="hl">10 大行业</span> &nbsp;·&nbsp; 两纵 = <span class="hl">大数据</span> · <span class="mg">AI</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 3 · Active Sharer ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">02 · 我是一个 ACTIVE SHARER</div>
+      <h2 class="q reveal reveal-2">为什么我愿意<br/>把<i>坑</i>都讲出来？</h2>
+      <div class="sub reveal reveal-3">
+        因为 AI 落地这件事，<b>成功经验很难复制，失败经验却高度通用</b>。<br/>
+        这几年我在内部、行业会议、厂商大会上讲过很多次 — 今天这场，我想讲得更实一点。
+      </div>
+    </div>
+    <div class="body">
+      <!-- PHOTOS: 替换 .ph 内容为 <img src="assets/xxx.jpg"> + <div class="tag">场合</div> -->
+      <div class="photo-wall reveal reveal-4">
+        <div class="ph"><div class="phl">PHOTO&nbsp;01<br/>待补</div></div>
+        <div class="ph"><div class="phl">PHOTO&nbsp;02<br/>待补</div></div>
+        <div class="ph"><div class="phl">PHOTO&nbsp;03<br/>待补</div></div>
+        <div class="ph"><div class="phl">PHOTO&nbsp;04<br/>待补</div></div>
+      </div>
+      <div class="chips reveal reveal-5" style="margin-top:16px">
+        <div class="chip">腾讯 AI 会议 · <b>企业 AI 落地</b></div>
+        <div class="chip mg2">AWS · <b>参展分享</b></div>
+        <div class="chip lm2">集团全员会 · <b>AI Design Token</b></div>
+        <div class="chip">内部 · <b>碳基生物 AI 学习小组</b></div>
+        <div class="chip mg2">DT All Hands</div>
+        <div class="chip lm2">Kellogg / Guanghua EMBA</div>
+      </div>
+    </div>
+    <div class="note reveal reveal-6">// 今天全程 <b>可以随时打断</b> — 每一页都是一个问题，不是一个结论。</div>
+  </section>
+
+  <!-- ============ 4 · 全景 ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">03 · 我们做了哪些开发</div>
+      <h2 class="q reveal reveal-2">6 个月，一个团队<br/>能做出多少 <em>AI 应用</em>？</h2>
+    </div>
+    <div class="body">
+      <div class="stats c4 reveal reveal-3" style="margin-top:20px">
+        <div class="stat"><div class="n count" data-to="74">0</div><div class="lab">AI 项目</div><div class="sub2">立项 / 在排期表内</div></div>
+        <div class="stat m"><div class="n count" data-to="38">0</div><div class="lab">应用接入 AI Portal</div><div class="sub2">2026.03 → 今</div></div>
+        <div class="stat l"><div class="n"><span class="count" data-to="40">0</span><small>+</small></div><div class="lab">人参与共建</div><div class="sub2">全部非专职</div></div>
+        <div class="stat g"><div class="n count" data-to="58">0</div><div class="lab">已结束</div><div class="sub2">另有 49 个进行中</div></div>
+      </div>
+      <div class="shots reveal reveal-4" style="margin-top:16px">
+        <div class="shot"><img src="assets/fdd-cases.png" alt="FDD AI 三大应用场景">
+          <div class="cap">DD AI · 投资尽调智能工作台 &nbsp;/&nbsp; 知识沉淀 · 自动总结 · 数据准备</div></div>
+        <div class="shot"><img src="assets/fdd-checklist.png" alt="FDD Checklist 优化工作台">
+          <div class="cap">FDD Checklist 优化工作台 &nbsp;/&nbsp; 历史问题提炼 · 缺失项与优化项审阅</div></div>
+      </div>
+      <div class="quote reveal reveal-5">
+        <div class="qt">「今天的 AI Coding，仍停留在 <span class="gd">1882 年的电灯时代</span>。」</div>
+        <div class="qs">吴泳铭 · 2026 云栖大会主论坛 · 昨天</div>
+      </div>
+    </div>
+    <div class="note reveal reveal-6">// 电最早只是用来替代煤油灯 — 所以我们这些，也只是煤油灯的替代品。</div>
+  </section>
+
+  <!-- ============ 5 · AI-Buddy 3.0 ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">03 · 我们做了哪些开发 &nbsp;/&nbsp; AI-BUDDY 3.0</div>
+      <h2 class="q reveal reveal-2">从「能跑」到「<em>能上生产</em>」，<br/>差的是什么？</h2>
+    </div>
+    <div class="body">
+      <div class="stats c4 reveal reveal-3" style="margin-top:18px">
+        <div class="stat"><div class="n count" data-to="1950">0</div><div class="lab">次代码提交</div><div class="sub2">2026.04.03 → 08.21</div></div>
+        <div class="stat m"><div class="n"><span class="count" data-to="8">0</span><small>万行</small></div><div class="lab">源码与文档</div><div class="sub2">31 份方案 · 46 个测试</div></div>
+        <div class="stat l"><div class="n count" data-to="151">0</div><div class="lab">次重构</div><div class="sub2">还早期架构债</div></div>
+        <div class="stat g"><div class="n count" data-to="158">0</div><div class="lab">首周使用用户</div><div class="sub2">无阻断故障 · 无安全事件</div></div>
+      </div>
+      <div class="split reveal reveal-4" style="margin-top:18px">
+        <div>
+          <div class="col-h cy">沙箱三代演进 · 每一次都是被真实约束推着走</div>
+          <table class="shift">
+            <tr><td class="from">本地 Docker<small>跑得通，但只能跑在单机上</small></td><td class="arrow">→</td><td class="to">大赛原型</td></tr>
+            <tr><td class="from">火山云 ECI + NAS<small>身份可伪造，验证过能读到别人的数据</small></td><td class="arrow">→</td><td class="to">迁云</td></tr>
+            <tr><td class="from">VEFAAS 云沙箱 + TOS<small>签名认证不可伪造，凭证不进沙箱</small></td><td class="arrow">→</td><td class="to">生产形态</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="col-h mg">安全是分水岭，不是阻碍</div>
+          <div class="cards" style="gap:10px">
+            <div class="card pink"><div class="ct"><span class="idx">!</span>沙箱内不存放任何真实密钥</div>
+              <div class="cd">代理执行整体搬到平台侧；临时令牌与沙箱生命周期绑定，闲置 10 分钟即销毁，令牌同步失效。</div></div>
+            <div class="card"><div class="ct"><span class="idx">!</span>先审后执行，不是事后补审</div>
+              <div class="cd">内容双向审查管「说了什么」，工具调用同步硬拦截管「做了什么」。</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="quote mg reveal reveal-5">
+        <div class="qt">「安全左移的成本收益比最高。请『<span class="mg">对手</span>』早进场，是最便宜的保险。」</div>
+        <div class="qs">AI-Buddy 3.0 复盘 · 学到了 · 第 5 条</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6 · 有趣的 idea ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">04 · 我们有哪些有趣的 IDEA</div>
+      <h2 class="q reveal reveal-2">一个 AI 团队的<br/>「<i>下班时间</i>」在干嘛？</h2>
+    </div>
+    <div class="body">
+      <div class="stats c3 reveal reveal-3" style="margin-top:20px">
+        <div class="stat"><div class="n count" data-to="83">0</div><div class="lab">个调研课题</div><div class="sub2">碳基生物 AI 学习小组</div></div>
+        <div class="stat m"><div class="n count" data-to="25">0</div><div class="lab">位研究者</div><div class="sub2">自愿认领 · 轮流分享</div></div>
+        <div class="stat l"><div class="n count" data-to="44">0</div><div class="lab">篇经验分享</div><div class="sub2">另有 27 工具 · 4 理论</div></div>
+      </div>
+      <div class="chips reveal reveal-4" style="margin-top:20px">
+        <div class="chip">AI 硬件 · <b>墨水屏用量看板</b></div>
+        <div class="chip mg2">ESP32-S3 + INMP441 · <b>声音波形可视化</b></div>
+        <div class="chip lm2">Neo4j · <b>Graph Engineering</b></div>
+        <div class="chip">WebGL · <b>流体噪声背景</b>（已用在 AI Portal 上）</div>
+        <div class="chip mg2"><b>曲名星</b> · 8 种策略给项目起名</div>
+        <div class="chip lm2"><b>GLP SkillsHub</b> · 自托管 Skills 注册中心</div>
+        <div class="chip">Remotion · <b>AI 生视频</b></div>
+        <div class="chip mg2"><b>10 倍速学习</b> · 视频字幕抓取 + AI 提炼</div>
+      </div>
+      <div class="cards c2 reveal reveal-5" style="margin-top:18px">
+        <div class="card gold">
+          <div class="ct"><span class="idx">A</span>他们有一个优先级标签叫「不值得分享」</div>
+          <div class="cd">83 个课题里，有 1 个被打上了这个标。<span class="gd">有判断力的组织，才会给东西打这个标。</span></div>
+        </div>
+        <div class="card cy">
+          <div class="ct"><span class="idx">B</span>Mono 一站平台 · 那一天的时间线</div>
+          <div class="cd">10:00 开会沟通需求 → 10:26 建群 → 14:19 需求明确 → 16:29 第一版功能 → <span class="hl">16:59 部署完成，发给业务试用</span>。</div>
+        </div>
+      </div>
+    </div>
+    <div class="note reveal reveal-6">// 应用发布周期：<b>一周 → 1 小时</b>。复盘原话：「维护一个好的 handbook，让接入事半功倍。」</div>
+  </section>
+
+  <!-- ============ 7 · 六类坑 ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow mg reveal reveal-1">05 · 我们踩过哪些坑</div>
+      <h2 class="q reveal reveal-2">9 周 · 93 人天 · 5 项硬指标全达成<br/>那<i>最贵的一段路</i>是什么？</h2>
+      <div class="sub reveal reveal-3">答案不是模型，不是算力，是 <b>口径</b>。指标范围确认 1-2 周、口径梳理 <b>4 周</b>、报表开发自测 2 周 — 这段时间无论自研还是买通用平台，都省不掉。</div>
+    </div>
+    <div class="body">
+      <div class="col-h mg reveal reveal-4" style="margin-top:18px">四个真实翻车点 · 现在全部由代码判定</div>
+      <div class="cards c2 reveal reveal-4">
+        <div class="card pink"><div class="ct"><span class="idx">①</span>「大上海」被当成上海</div>
+          <div class="cd">AI 凭语义判断约等于上海，直接查上海并返回一份文不对题的报告。<span class="mg">语气笃定，前提是错的</span> — 这是最难被发现的一类失败。</div></div>
+        <div class="card pink"><div class="ct"><span class="idx">②</span>「深圳保税区」</div>
+          <div class="cd">「保税区」是地名的一部分。代码先做三级精确匹配，全失败了才去查关键字，所以真实存在的「福田保税区」不会被误伤。</div></div>
+        <div class="card pink"><div class="ct"><span class="idx">③</span>「空港」</div>
+          <div class="cd">九个城市共用的园区名。模糊检索式系统会静默选中相似度最高的那个 — 这里强制中断，要求用户指定城市。</div></div>
+        <div class="card pink"><div class="ct"><span class="idx">④</span>「北京」查不到</div>
+          <div class="cd">必须死咬「<span class="mg">不是查无此数据，是没有权限</span>」，防止用户把权限问题当成打错字，反复换地名重试。</div></div>
+      </div>
+      <div class="quote reveal reveal-5">
+        <div class="qt">上下文超限，<span class="gd">第 7 次调阈值才找到真凶</span> — 是一张 226 万字符的图片撑爆了上下文。调阈值只是治标。</div>
+        <div class="qs">坑 ⑤ 工程与交付 · 「盲修 → 修不动 → 加日志 → 找到根因」，在六个模块上重复了六遍</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8 · 一条主线 ============ -->
+  <section class="slide brackets">
+    <span class="br-bl"></span><span class="br-br"></span>
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">05 · 我们踩过哪些坑 &nbsp;/&nbsp; 一条主线</div>
+      <h2 class="q reveal reveal-2">你的场景，真的需要<br/>一个<em>会说话</em>的模型吗？</h2>
+    </div>
+    <div class="body">
+      <div class="thesis reveal reveal-3">
+        <div class="big">六类坑看着不相干。但排在一起会发现 —<br/>每一个都是<i>「某处该由代码决定的事，<br/>被交给了模型、或者运气」</i>。</div>
+      </div>
+      <div class="split reveal reveal-4">
+        <div>
+          <div class="col-h cy">我们把判断权收回来了</div>
+          <table class="shift">
+            <tr><td class="from">交给模型判断<small>口径怎么加权、地名是哪一级</small></td><td class="arrow">→</td><td class="to">固化在视图与指标层<br/><small style="color:var(--ink-3);font-weight:400">模型只传参数</small></td></tr>
+            <tr><td class="from">交给提示词约束<small>归因拆到哪一级、报告写几段</small></td><td class="arrow">→</td><td class="to">结构与阈值写死<br/><small style="color:var(--ink-3);font-weight:400">模型只填数</small></td></tr>
+            <tr><td class="from">交给同一个进程<small>权限过滤条件和可控的 SQL 文本</small></td><td class="arrow">→</td><td class="to">隔离到沙箱外的独立服务</td></tr>
+            <tr><td class="from">交给运气<small>并发、超时、状态一致性、配置同步</small></td><td class="arrow">→</td><td class="to">先建可观测性，再谈优化</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="col-h mg">同一周，硅谷给出了同样的答案</div>
+          <div class="card pink">
+            <div class="ct"><span class="idx">JEV</span>TypeSafe AI · 2026.09.15</div>
+            <div class="cd">
+              前 OpenAI 研究员 Diogo Almeida（RLHF 早期贡献者）发布的「System One 模型」：<b class="mg">不生成任何文字，只输出结构化判断</b> — 选项、评分、0-1 概率。<br/><br/>
+              延迟 70-500ms，官方称比同类前沿模型<b class="mg">快 193.6 倍、便宜 444.6 倍</b>，结构上无幻觉。数日内社区搭出 500+ 开源项目。
+            </div>
+          </div>
+          <div class="quote cy" style="margin-top:12px">
+            <div class="qt">「AI 问数<span class="hl">不要完全依赖 AI</span>，要采用 <span class="hl">Code + AI</span> 结合的方式。」</div>
+            <div class="qs">GLP 内部项目复盘 · 智能通讯录</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note reveal reveal-6">// 通用助手也有边界：<b>AI-Buddy 是通用的，问数是专用的</b> — 需要精确口径和权限过滤的场景，通用助手碰不了。</div>
+  </section>
+
+  <!-- ============ 9 · 外部信息 ============ -->
+  <section class="slide">
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">06 · 结合外部信息</div>
+      <h2 class="q reveal reveal-2">行业<em>这一周</em><br/>发生了什么？</h2>
+    </div>
+    <div class="body">
+      <div class="news reveal reveal-3" style="margin-top:20px">
+        <div class="nw hot">
+          <div class="dt">09 · 15 &nbsp;/&nbsp; 一周前</div>
+          <div class="nt">Jev · 一个不肯写字的模型</div>
+          <div class="nd">不生成文字，只下判断。和我们 9 周踩出来的结论，是同一件事。</div>
+        </div>
+        <div class="nw hot">
+          <div class="dt">09 · 22 &nbsp;/&nbsp; 昨天</div>
+          <div class="nt">云栖大会 ·「智以致用」</div>
+          <div class="nd">吴泳铭：未来机器思考总量将是人类的 <b class="gd">1000 倍</b>，今天不到 3%。AI Coding 仍停留在 1882 年的电灯时代。</div>
+        </div>
+        <div class="nw">
+          <div class="dt">MIT · 商业 AI 现状</div>
+          <div class="nt">投入超 300 亿美元，<b class="mg">95%</b> 的企业 GenAI 试点没能进生产</div>
+          <div class="nd">归因不是模型质量，而是系统能不能学习和适应 —「静态工具必死」。</div>
+        </div>
+        <div class="nw">
+          <div class="dt">STANFORD · 51 个真实部署</div>
+          <div class="nt"><b class="hl">77%</b> 的最难挑战来自变革管理、数据质量和流程重构</div>
+          <div class="nd">技术，始终是最容易的那部分。</div>
+        </div>
+      </div>
+      <div class="quote reveal reveal-4">
+        <div class="qt">模型越来越便宜 → 但资本支出还在涨、吴泳铭说还有几万倍空间 —<br/><span class="gd">省下来的钱没有变成节约，变成了更大的需求。</span></div>
+        <div class="qs">Jevons 杰文斯悖论 · 效率越高，总消耗越大</div>
+      </div>
+    </div>
+    <div class="note reveal reveal-5">// 好消息是：<b>需求不会因为模型变便宜而消失，只会变多。</b></div>
+  </section>
+
+  <!-- ============ 10 · 讨论 ============ -->
+  <section class="slide brackets">
+    <span class="br-bl"></span><span class="br-br"></span>
+    <div class="head">
+      <div class="eyebrow reveal reveal-1">06 · 引发思考</div>
+      <h2 class="q reveal reveal-2">接下来的半小时，<br/>我更想<em>听你们说</em></h2>
+    </div>
+    <div class="body">
+      <div class="disc reveal reveal-3" style="margin-top:22px">
+        <div class="dq">
+          <div class="num">01</div>
+          <div>
+            <div class="dt2">哪些判断该交给模型，哪些必须留给代码？</div>
+            <div class="dd">这条线，你们在客户现场是怎么划的？有没有一条通用的判断标准？</div>
+          </div>
+        </div>
+        <div class="dq">
+          <div class="num">02</div>
+          <div>
+            <div class="dt2">当业务方自己就能做出应用，工程团队的价值往哪走？</div>
+            <div class="dd">40 多个非专职的人做出了 38 个应用 — 这件事对你我意味着什么？</div>
+          </div>
+        </div>
+        <div class="dq">
+          <div class="num">03</div>
+          <div>
+            <div class="dt2">你们见过最贵的一个坑是什么？</div>
+            <div class="dd">今天我把我们的六类坑都摊开了。换你们讲讲。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note reveal reveal-5">// 谢谢各位 — 这些坑，希望能帮你们少走一段路。&nbsp;&nbsp;<b>Chen Gao · 高晨 · GLP</b></div>
+  </section>
+
+</div>
+
+<div class="ticks" id="ticks"></div>
+<div class="hint" id="page-num">01 <b>/ 10</b></div>
+
+<script>
+/* ============ deck control ============ */
+const slides = document.querySelectorAll('.slide');
+const ticks  = document.getElementById('ticks');
+const pageNum= document.getElementById('page-num');
+const total  = slides.length;
+let current  = 0;
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const pad = n => String(n).padStart(2,'0');
+
+function buildTicks(){
+  ticks.innerHTML='';
+  for(let i=0;i<total;i++){
+    const t=document.createElement('div');
+    t.className='tk'; t.onclick=()=>goTo(i);
+    ticks.appendChild(t);
+  }
+}
+function render(){
+  slides.forEach((s,i)=>{
+    s.classList.toggle('active',i===current);
+    s.classList.toggle('prev',i<current);
+  });
+  ticks.querySelectorAll('.tk').forEach((t,i)=>{
+    t.classList.toggle('active',i===current);
+    t.classList.toggle('done',i<current);
+  });
+  pageNum.innerHTML = pad(current+1)+' <b>/ '+pad(total)+'</b>';
+  countUp(slides[current]);
+}
+function countUp(slide){
+  if(REDUCED) return;
+  slide.querySelectorAll('.count').forEach(el=>{
+    const to=parseFloat(el.dataset.to)||0, dur=1000, t0=performance.now();
+    requestAnimationFrame(function step(now){
+      const p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(to*e).toLocaleString();
+      if(p<1) requestAnimationFrame(step); else el.textContent=to.toLocaleString();
+    });
+  });
+}
+function goTo(i){ if(i<0||i>=total) return; current=i; render(); }
+const next=()=>goTo(Math.min(current+1,total-1));
+const prev=()=>goTo(Math.max(current-1,0));
+
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight',' ','PageDown','ArrowDown'].includes(e.key)){e.preventDefault();next();}
+  else if(['ArrowLeft','PageUp','ArrowUp'].includes(e.key)){e.preventDefault();prev();}
+  else if(e.key==='Home') goTo(0);
+  else if(e.key==='End')  goTo(total-1);
+  else if(e.key==='f'||e.key==='F'){
+    document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+  }
+});
+let tx=0;
+addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{
+  const d=e.changedTouches[0].clientX-tx;
+  if(Math.abs(d)>60){ d<0?next():prev(); }
+},{passive:true});
+
+/* ============ clock ============ */
+setInterval(()=>{
+  const d=new Date();
+  document.getElementById('clock').textContent =
+    [d.getHours(),d.getMinutes(),d.getSeconds()].map(n=>pad(n)).join(':');
+},1000);
+
+/* ============ particles ============ */
+(function(){
+  const cv=document.getElementById('particles'), ctx=cv.getContext('2d');
+  let W,H,ps=[];
+  function size(){ W=cv.width=innerWidth; H=cv.height=innerHeight; }
+  size(); addEventListener('resize',size);
+  const N = Math.min(70, Math.floor(innerWidth/22));
+  for(let i=0;i<N;i++) ps.push({
+    x:Math.random()*W, y:Math.random()*H,
+    vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22,
+    r:Math.random()*1.5+.4, a:Math.random()*.5+.15
+  });
+  (function loop(){
+    if(REDUCED) return;
+    ctx.clearRect(0,0,W,H);
+    ps.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7);
+      ctx.fillStyle='rgba(0,240,255,'+p.a+')'; ctx.fill();
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+buildTicks(); render();
+</script>
+</body>
+</html>
